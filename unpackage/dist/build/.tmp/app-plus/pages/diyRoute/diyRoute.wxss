@@ -1,0 +1,25 @@
+
+.DayCss{
+	display: inline-block;
+	width: 40%;
+	text-align: center;
+	vertical-align: top;
+}
+.dateNumCss{
+	width: 20%;
+	text-align: center;
+	display: inline-block;
+	padding-top: 3%;
+}
+.chooseViewCss{
+	width: 100%;
+	text-align: center;
+	padding-bottom: 5%;
+	padding-top: 5%;
+}
+.chooseViewCss_option{
+	display: inline-block;
+	margin: 10% 5%;
+	width: 40%;
+}
+

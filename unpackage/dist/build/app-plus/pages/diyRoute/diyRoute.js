@@ -1,0 +1,2 @@
+setCssToHead([".",[1],"DayCss{ display: inline-block; width: 40%; text-align: center; vertical-align: top; }\n.",[1],"dateNumCss{ width: 20%; text-align: center; display: inline-block; padding-top: 3%; }\n.",[1],"chooseViewCss{ width: 100%; text-align: center; padding-bottom: 5%; padding-top: 5%; }\n.",[1],"chooseViewCss_option{ display: inline-block; margin: 10% 5%; width: 40%; }\n",],undefined,{path:"./pages/diyRoute/diyRoute.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/diyRoute/diyRoute.wxml') } }));
