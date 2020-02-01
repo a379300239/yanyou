@@ -35,8 +35,8 @@
 					<view class="oneSiteCss">
 						<view style="display: inline-block; width: 90%; text-align: left;">
 							<uni-swipe-action>
-							    <uni-swipe-action-item :options="siteChoose" @click="click_site($event,dayId)" mode="site">
-							        <view>{{onesite}}</view>
+							    <uni-swipe-action-item :options="siteChoose" @click="click_site($event,dayId,currentSiteIndex)" mode="site">
+							        <view>{{currentSiteIndex+1}}、{{onesite}}</view>
 							    </uni-swipe-action-item>
 							</uni-swipe-action>
 						</view>
@@ -59,7 +59,7 @@
 				<view class="chooseViewCss">
 					 <view class="chooseViewCss_option">
 						<!-- <button>景区</button> -->
-						<picker class="navigator-siteChoose" @columnchange="change_site" @change="add_site" mode="multiSelector" :range="currentSitesList" :value="currentSiteIndex"><button>景区</button></picker>
+							<picker class="navigator-siteChoose" @columnchange="change_site" @change="add_site" mode="multiSelector" :range="currentSitesList" :value="currentSiteIndex"><button>景区</button></picker>
 					 </view>
 					 					 
 					 <view class="chooseViewCss_option">
@@ -84,7 +84,7 @@
 				<!-- 吃饭选择 -->
 				<uni-popup ref="customView" type="bottom">
 					<view class="customViewCss">
-						<input style="background: white;" type="text" v-model="currentCustom"/>
+						<input style="background: white;" type="text" v-model="currentSite"/>
 						<view class="subOrCancelCss">
 							<view class="subOrCancel_cancelCss" @click="cancel_custom">取消</view>
 							<view class="subOrCancel_subCss" @click="sub_custom">确认</view>
@@ -173,7 +173,6 @@
 				currentDayId:"",
 				currentDayIndex:"",		//当前选择日期
 				currentSite:"",			//当前选择景点
-				currentCustom:"",		//当前自定义
 				currentSiteIndex:[0,0,0],
 				currentSitesList:[],	//复选框中景点列表
 				sites:{//应有景点数据
@@ -222,12 +221,13 @@
 			}
 		},
 		onLoad() {
-			//默认景点
-			this.currentSite=this.sites.sites[this.currentSiteIndex[0]][this.currentSiteIndex[1]][this.currentSiteIndex[2]];
-			//更新景点选择列表
-			this.currentSitesList.push(this.sites.province);
-			this.currentSitesList.push(this.sites.city[0]);
-			this.currentSitesList.push(this.sites.sites[0][0]);
+			// //默认景点
+			// this.currentSite=this.sites.sites[this.currentSiteIndex[0]][this.currentSiteIndex[1]][this.currentSiteIndex[2]];
+			// //更新景点选择列表
+			// this.currentSitesList.push(this.sites.province);
+			// this.currentSitesList.push(this.sites.city[0]);
+			// this.currentSitesList.push(this.sites.sites[0][0]);
+			console.log(this.currentSitesList)
 		},
 		methods: {
 /*-----------------------------------------------------------------------------------------------------------------
@@ -287,7 +287,7 @@
 					case "增加一天":this.add_day(dayId);break;
 					case "修改一天":this.modify_day(dayId);break;
 					case "删除一天":this.delete_day(dayId);break;
-					case "增加景点":this.open_chooseView(dayId);break;
+					case "增加景点":this.open_chooseView(dayId,0);break;
 				}
 			},
 			//增加一天
@@ -370,15 +370,33 @@
 			/*景点*/
 			/**********************************************************/
 			//景点操作
-			click_site:function(e,dayId){
+			click_site:function(e,dayId,siteId){
 				switch(e.content.text){
-					case "增加景点":this.open_chooseView(dayId);break;
+					case "增加景点":this.open_chooseView(dayId,siteId);break;
 					case "删除景点":this.delete_site(dayId,siteId);break;
 					case "修改景点":this.modify_site(dayId,siteId);break;
 				}
 			},
+			//提前加载数据
+			load_data:function(type){
+				switch (type){
+					//景点@click="load_data('site')"
+					case 'site':{
+						if(this.currentSitesList){
+							//默认景点
+							this.currentSite=this.sites.sites[this.currentSiteIndex[0]][this.currentSiteIndex[1]][this.currentSiteIndex[2]];
+							//更新景点选择列表
+							this.currentSitesList.push(this.sites.province);
+							this.currentSitesList.push(this.sites.city[0]);
+							this.currentSitesList.push(this.sites.sites[0][0]);
+						}
+					}break;
+				}
+			},
 			//打开景点选择弹窗
-			open_chooseView:function(dayId){
+			open_chooseView:function(dayId,siteId){
+				this.load_data('site')
+				console.log(this.currentSitesList)
 				this.currentDayIndex=dayId;
 				this.$refs.chooseView.open();
 			},
@@ -428,7 +446,7 @@
 			},
 			//提交自定义路线
 			sub_custom:function(e){
-				if(this.currentCustom==""){
+				if(this.currentSite==""){
 					uni.showToast({	
 						title:"请输入自定义景点",
 						duration:2000,
@@ -436,7 +454,7 @@
 					});
 				}
 				else{
-					this.siteRoute_all[this.currentDayIndex].siteRoute_oneDay.push(this.currentCustom);
+					this.add_site();
 					//关闭自定义框及选择框	
 					this.$refs.chooseView.close();
 					this.$refs.customView.close();
