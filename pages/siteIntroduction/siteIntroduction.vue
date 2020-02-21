@@ -49,13 +49,13 @@
 				</view>
 				
 			</view>
-		</view>
-		
-		<!-- 增加按钮，当isEdit为true时出现 -->
-		<view v-if="isEdit" class="addButtonCss">
-			<image src="../../static/siteIntroduction/add.png"></image>
-		</view>
-
+			
+			<!-- 增加按钮，当isEdit为true时出现 -->
+			<view v-if="isEdit" class="addButtonCss">
+				<image src="../../static/siteIntroduction/add.png"></image>
+			</view>
+			
+		</view>		
 	</view>
 </template>
 
@@ -199,7 +199,8 @@
 	display: inline-block;
 	/* width: 750rpx; */
 	margin-left: 20rpx;
-	margin-top: 30rpx
+	margin-top: 60rpx;
+	margin-bottom:30rpx;
 }
 
 .location_iconView{
@@ -248,11 +249,11 @@
 }
 
 .addButtonCss{
-	position: fixed;
+	position: relative;
 	z-index: 5;
 	width: 750rpx;
 	text-align: center;
-	bottom: 30rpx;
+	bottom:50rpx;
 }
 
 .addButtonCss image{

@@ -3089,15 +3089,15 @@ var m17=function(e,s,r,gg){
 var z=gz$gwx_18()
 var oLN=_n('view')
 _rz(z,oLN,'style',0,e,s,gg)
-var cNN=_mz(z,'image',['src',1,'style',1],[],e,s,gg)
+var fMN=_mz(z,'image',['src',1,'style',1],[],e,s,gg)
+_(oLN,fMN)
+var cNN=_n('navigator')
+_rz(z,cNN,'openType',3,e,s,gg)
+var hON=_mz(z,'image',['src',4,'style',1],[],e,s,gg)
+_(cNN,hON)
 _(oLN,cNN)
-var hON=_n('navigator')
-_rz(z,hON,'openType',3,e,s,gg)
-var oPN=_mz(z,'image',['src',4,'style',1],[],e,s,gg)
-_(hON,oPN)
-_(oLN,hON)
-var cQN=_n('view')
-_rz(z,cQN,'class',6,e,s,gg)
+var oPN=_n('view')
+_rz(z,oPN,'class',6,e,s,gg)
 var oRN=_n('view')
 _rz(z,oRN,'class',7,e,s,gg)
 var lSN=_n('view')
@@ -3166,19 +3166,19 @@ _(cFO,hGO)
 _(fEO,cFO)
 _(l7N,fEO)
 _(oRN,l7N)
-_(cQN,oRN)
-_(oLN,cQN)
-var fMN=_v()
-_(oLN,fMN)
-if(_oz(z,40,e,s,gg)){fMN.wxVkey=1
+_(oPN,oRN)
+var cQN=_v()
+_(oPN,cQN)
+if(_oz(z,40,e,s,gg)){cQN.wxVkey=1
 var cIO=_n('view')
 _rz(z,cIO,'class',41,e,s,gg)
 var oJO=_n('image')
 _rz(z,oJO,'src',42,e,s,gg)
 _(cIO,oJO)
-_(fMN,cIO)
+_(cQN,cIO)
 }
-fMN.wxXCkey=1
+cQN.wxXCkey=1
+_(oLN,oPN)
 _(r,oLN)
 return r
 }
@@ -3358,7 +3358,7 @@ __wxAppCode__['pages/myInformation/myInformation.wxml']=$gwx('./pages/myInformat
 __wxAppCode__['pages/register/register.wxss']=setCssToHead(["body{ background-color:#73D2D6; }\n.",[1],"div-logo{ margin-top: ",[0,100],"; margin-bottom: ",[0,80],"; width: ",[0,750],"; text-align: center; }\n.",[1],"div-logo wx-image{ width: ",[0,200],"; height: ",[0,200],"; }\n.",[1],"div-logo .",[1],"_p{ width: ",[0,300],"; margin: 0 auto; border-bottom: ",[0,1]," solid black; padding-bottom: ",[0,5],"; }\n.",[1],"div-form{ width: ",[0,750],"; text-align: center; }\n.",[1],"img-backImg{ left: 0; right: 0; margin:0 auto; width: ",[0,600],"; height: ",[0,700],"; position:absolute; }\n.",[1],"img-icon{ position: relative; left: 0; right: 0; margin:0 auto; margin-top: ",[0,80],"; width: ",[0,200],"; height: ",[0,200],"; border-radius:50%; }\n.",[1],"input-userName{ margin-top: ",[0,50],"; display: inline-block; width: ",[0,400],"; border-bottom: ",[0,1]," solid black; position: relative; }\n.",[1],"input-passWord{ margin-top: ",[0,30],"; display: inline-block; width: ",[0,400],"; border-bottom: ",[0,1]," solid black; position: relative; }\n.",[1],"button-submit{ margin-top: ",[0,100],"; border-radius: 100px; background-color: #000000; color:#FFFFFF; width: ",[0,300],"; }\n.",[1],"button-submit-hover{ margin-top: ",[0,90],"; width: ",[0,400],"; height: ",[0,100],"; background-color: #8F8F94; }\n.",[1],"button-back{ left: 0; right: 0; margin:0 auto; margin-top: ",[0,50],"; width: ",[0,300],"; font-size: ",[0,35],"; }\n.",[1],"whiteWord{ color:#FFFFFF; }\n",],undefined,{path:"./pages/register/register.wxss"});    
 __wxAppCode__['pages/register/register.wxml']=$gwx('./pages/register/register.wxml');
 
-__wxAppCode__['pages/siteIntroduction/siteIntroduction.wxss']=setCssToHead([".",[1],"cardBackgroundCss{ position: absolute; z-index: 3; width: ",[0,750],"; margin-top: ",[0,490],"; display: inline-block; text-align: center; }\n.",[1],"siteCardCss{ width: ",[0,700],"; background-color: #FAFAFA; -webkit-border-radius: 20px; display: inline-block; text-align: left; }\n.",[1],"titleCss{ font-size: ",[0,65],"; margin-left: ",[0,30],"; padding-top: ",[0,30],"; }\n.",[1],"featureCss{ font-size: ",[0,33],"; margin-left: ",[0,20],"; margin-top: ",[0,15],"; margin-bottom: ",[0,15],"; color: #00bec6; }\n.",[1],"locationCss{ display: inline-block; margin-left: ",[0,20],"; margin-top: ",[0,30]," }\n.",[1],"location_iconView{ display: inline-block; margin-right: ",[0,20],"; padding-bottom: ",[0,10],"; vertical-align: bottom; }\n.",[1],"locationCss_iconCss{ display: inline-block; width: ",[0,64],"; height: ",[0,64],"; }\n.",[1],"locationCss_location{ display: inline-block; font-size: ",[0,40],"; vertical-align: bottom; padding-bottom: ",[0,25],"; }\n.",[1],"locationCss_distance{ font-size: ",[0,30],"; color: #999999; }\n.",[1],"playTimeCss{ display: inline-block; margin-left: ",[0,20],"; margin-top: ",[0,30],"; margin-bottom:",[0,250],"; }\n.",[1],"playTimeCss_siteOpenTime{ display: inline-block; font-size: ",[0,40],"; vertical-align: bottom; padding-bottom: ",[0,25],"; }\n.",[1],"playTimeCss_sitePlaytime{ font-size: ",[0,30],"; color: #999999; }\n.",[1],"addButtonCss{ position: fixed; z-index: 5; width: ",[0,750],"; text-align: center; bottom: ",[0,30],"; }\n.",[1],"addButtonCss wx-image{ width: ",[0,162],"; height: ",[0,100],"; }\n",],undefined,{path:"./pages/siteIntroduction/siteIntroduction.wxss"});    
+__wxAppCode__['pages/siteIntroduction/siteIntroduction.wxss']=setCssToHead([".",[1],"cardBackgroundCss{ position: absolute; z-index: 3; width: ",[0,750],"; margin-top: ",[0,490],"; display: inline-block; text-align: center; }\n.",[1],"siteCardCss{ width: ",[0,700],"; background-color: #FAFAFA; -webkit-border-radius: 20px; display: inline-block; text-align: left; }\n.",[1],"titleCss{ font-size: ",[0,65],"; margin-left: ",[0,30],"; padding-top: ",[0,30],"; }\n.",[1],"featureCss{ font-size: ",[0,33],"; margin-left: ",[0,20],"; margin-top: ",[0,15],"; margin-bottom: ",[0,15],"; color: #00bec6; }\n.",[1],"locationCss{ display: inline-block; margin-left: ",[0,20],"; margin-top: ",[0,60],"; margin-bottom:",[0,30],"; }\n.",[1],"location_iconView{ display: inline-block; margin-right: ",[0,20],"; padding-bottom: ",[0,10],"; vertical-align: bottom; }\n.",[1],"locationCss_iconCss{ display: inline-block; width: ",[0,64],"; height: ",[0,64],"; }\n.",[1],"locationCss_location{ display: inline-block; font-size: ",[0,40],"; vertical-align: bottom; padding-bottom: ",[0,25],"; }\n.",[1],"locationCss_distance{ font-size: ",[0,30],"; color: #999999; }\n.",[1],"playTimeCss{ display: inline-block; margin-left: ",[0,20],"; margin-top: ",[0,30],"; margin-bottom:",[0,250],"; }\n.",[1],"playTimeCss_siteOpenTime{ display: inline-block; font-size: ",[0,40],"; vertical-align: bottom; padding-bottom: ",[0,25],"; }\n.",[1],"playTimeCss_sitePlaytime{ font-size: ",[0,30],"; color: #999999; }\n.",[1],"addButtonCss{ position: relative; z-index: 5; width: ",[0,750],"; text-align: center; bottom:",[0,50],"; }\n.",[1],"addButtonCss wx-image{ width: ",[0,162],"; height: ",[0,100],"; }\n",],undefined,{path:"./pages/siteIntroduction/siteIntroduction.wxss"});    
 __wxAppCode__['pages/siteIntroduction/siteIntroduction.wxml']=$gwx('./pages/siteIntroduction/siteIntroduction.wxml');
 
 ;var __pageFrameEndTime__ = Date.now();
