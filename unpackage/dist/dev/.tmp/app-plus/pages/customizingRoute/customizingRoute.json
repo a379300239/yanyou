@@ -1,4 +1,8 @@
 {
+  "navigationBarTitleText": "定制路线",
+  "navigationBarTextStyle": "black",
   "navigationStyle": "custom",
-  "usingComponents": {}
+  "usingComponents": {
+    "drag-sort": "/components/drag-sort/index"
+  }
 }

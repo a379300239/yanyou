@@ -1,1 +1,1 @@
-<view style="width:100%;background:#FAFAFA;"><view style="width:100%;height:65rpx;display:block;background:#000000;"></view><view class="_p">定制路线</view></view>
+<view style="width:100%;background:#FAFAFA;"><view style="padding-top:8%;" class="_p">定制路线</view><view><drag-sort vue-id="1" list="{{list}}" props="{{props}}" data-event-opts="{{[['^change',[['onDragSortChange']]]]}}" bind:change="__e" bind:__l="__l"></drag-sort></view></view>

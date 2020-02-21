@@ -5,7 +5,9 @@
     "pages/register/register",
     "pages/customizingRoute/customizingRoute",
     "pages/diyRoute/diyRoute",
-    "pages/myInformation/myInformation"
+    "pages/myInformation/myInformation",
+    "pages/siteIntroduction/siteIntroduction",
+    "pages/editRoute/editRoute"
   ],
   "window": {},
   "tabBar": {

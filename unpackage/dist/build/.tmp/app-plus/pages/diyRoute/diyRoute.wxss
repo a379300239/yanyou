@@ -1,25 +1,71 @@
 
-.DayCss{
+.addCardCss{
+	margin-left: 10rpx;
+	top:30rpx;
+	width: 360rpx;
+	height: 500rpx;
+	position: relative;
+	overflow: hidden;
 	display: inline-block;
-	width: 40%;
-	text-align: center;
-	vertical-align: top;
+	-webkit-border-radius: 20rpx;	/*圆角 */
+	/* text-align: center; */
 }
-.dateNumCss{
-	width: 20%;
-	text-align: center;
-	display: inline-block;
-	padding-top: 3%;
+.addCardCss_bgimg{
+	/* width: ; */
+	height: 500rpx;
+	position: absolute;
+	z-index: 0;
 }
-.chooseViewCss{
-	width: 100%;
-	text-align: center;
-	padding-bottom: 5%;
-	padding-top: 5%;
+.addButtonCss_black{
+	position: absolute;
+	z-index: 1;
+	opacity: 0.7;
+	width: 360rpx;
+	height: 500rpx;
 }
-.chooseViewCss_option{
-	display: inline-block;
-	margin: 10% 5%;
-	width: 40%;
+.addButtonCss_addimg{
+	width: 100rpx;
+	height: 100rpx;
+	top:180rpx;
+	left: 140rpx;
+	text-align: center;
+	position: absolute;
+	z-index: 1;
+}
+.addCardCss_statue{
+	position: absolute;
+	z-index: 1;
+	display: inline;
+	top:40rpx;
+	left: 20rpx;
+	padding: 5rpx 20rpx;
+	color: #FFFFFF;
+	-webkit-border-radius: 20rpx;	/*圆角 */
+}
+.addButtonCss_listChoose{
+	padding: 30rpx;
+	position: absolute;
+	z-index: 2;
+	top:35rpx;
+	right: 0rpx;
+	width: 60rpx;
+	height: 15rpx;
+}
+.addCardCss_siteName{
+	top:120rpx;
+	left: 25rpx;
+	margin-right: 30rpx;
+	position: relative;
+	z-index: 1;
+	font-size: 50rpx;
+	color: #FFFFFF;
+}
+.addCardCss_siteTime{
+	top:135rpx;
+	left: 25rpx;
+	position: relative;
+	z-index: 1;
+	font-size: 30rpx;
+	color: #FFFFFF;
 }
 

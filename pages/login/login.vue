@@ -60,12 +60,11 @@
 					
 					success: (res) => {
 						uni.hideLoading();
-						
 
 						if(res.data.success=="true"){
-							//登陆成功
-							uni.switchTab({
-								url:"../myInformation/myInformation",
+							//登陆成功，将个人信息存入数据库
+							uni.reLaunch({
+								url:"../index/index",
 								success:function(){
 									uni.showToast({
 										title:"登陆成功"
@@ -74,8 +73,8 @@
 							});
 							//缓存
 							uni.setStorage({
-								key: 'isLogin',
-								data: 'yes'
+								key: 'currentUser',
+								data: res.data
 							});
 						}
 						else{

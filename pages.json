@@ -3,12 +3,16 @@
 		{
 			"path": "pages/index/index",
 			"style": {
+				 "navigationBarTitleText":"首页",
+				 "navigationBarTextStyle": "black",
 				 "navigationStyle":"custom"
 			}
 		}
 		,{
 			"path": "pages/login/login",
 			"style": {
+				"navigationBarTitleText":"地选路线",
+				"navigationBarTextStyle": "black",
 				"navigationStyle":"custom"
 			}
 		}
@@ -21,31 +25,39 @@
         ,{
             "path" : "pages/customizingRoute/customizingRoute",
             "style" : {
+				"navigationBarTitleText":"定制路线",
+				"navigationBarTextStyle": "black",
 				"navigationStyle":"custom"
 			}
         }
         ,{
             "path" : "pages/diyRoute/diyRoute",
             "style" : {
-				"navigationStyle":"custom",
+				"navigationBarTitleText":"我的行程",
+				"navigationBarTextStyle": "black",
 				"app-plus":{
-					"subNVues":{
-						"id":"choose_part",
-						"path" : "pages/diyRoute/subnvue/choose/choose",
-						"style":{
-							"position": "absolute",  
-							"dock": "right",  
-							"width": "100upx",  
-							"height": "150upx",  
-							"background": "transparent"  
-						}
-					}
 				}
 			}
         }
         ,{
             "path" : "pages/myInformation/myInformation",
             "style" : {
+				"navigationStyle":"custom",
+				"navigationBarTitleText":"我的信息",
+				"navigationBarTextStyle": "white"
+			}
+        }
+        ,{
+            "path" : "pages/siteIntroduction/siteIntroduction",
+            "style" : {
+				"navigationStyle":"custom"
+			}
+        }
+        ,{
+            "path" : "pages/editRoute/editRoute",
+            "style" : {
+				"navigationBarTitleText":"自选路线",
+				"navigationBarTextStyle": "black",
 				"navigationStyle":"custom"
 			}
         }

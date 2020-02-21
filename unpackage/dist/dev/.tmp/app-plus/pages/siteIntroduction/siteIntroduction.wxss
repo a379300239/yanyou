@@ -1,0 +1,84 @@
+
+.cardBackgroundCss{
+	position: absolute;
+	z-index: 3;
+	width: 750rpx;
+	margin-top: 490rpx;
+	display: inline-block;
+	text-align: center;
+}
+.siteCardCss{
+	width: 700rpx;
+	background-color: #FAFAFA;
+	-webkit-border-radius: 20px;	/*圆角 */
+	display: inline-block;
+	text-align: left;
+}
+.titleCss{
+	font-size: 65rpx;
+	margin-left: 30rpx;
+	padding-top: 30rpx;
+}
+.featureCss{
+	font-size: 33rpx;
+	margin-left: 20rpx;
+	margin-top: 15rpx;
+	margin-bottom: 15rpx;
+	color: #00bec6;
+}
+.locationCss{
+	display: inline-block;
+	/* width: 750rpx; */
+	margin-left: 20rpx;
+	margin-top: 30rpx
+}
+.location_iconView{
+	display: inline-block;
+	margin-right: 20rpx;
+	padding-bottom: 10rpx;
+	vertical-align: bottom;
+}
+.locationCss_iconCss{
+	display: inline-block;
+	width: 64rpx;
+	height: 64rpx;
+}
+.locationCss_location{
+	display: inline-block;
+	font-size: 40rpx;
+	vertical-align: bottom;
+	padding-bottom: 25rpx;
+}
+.locationCss_distance{
+	font-size: 30rpx;
+	color: #999999;
+}
+.playTimeCss{
+	display: inline-block;
+	/* width: 750rpx; */
+	margin-left: 20rpx;
+	margin-top: 30rpx;
+	margin-bottom:250rpx;
+}
+.playTimeCss_siteOpenTime{
+	display: inline-block;
+	font-size: 40rpx;
+	vertical-align: bottom;
+	padding-bottom: 25rpx;
+}
+.playTimeCss_sitePlaytime{
+	font-size: 30rpx;
+	color: #999999;
+}
+.addButtonCss{
+	position: fixed;
+	z-index: 5;
+	width: 750rpx;
+	text-align: center;
+	bottom: 30rpx;
+}
+.addButtonCss image{
+	width: 162rpx;
+	height: 100rpx;
+}
+

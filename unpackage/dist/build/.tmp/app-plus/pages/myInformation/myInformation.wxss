@@ -1,0 +1,54 @@
+
+.functionAreaCss{
+	margin-top: 20rpx;
+	display: inline-block;
+	width:750rpx;
+	text-align: center;
+	position: relative;
+	z-index: 3;
+}
+.functionAreaCss view{
+	margin: 0 20rpx 0 20rpx;
+	display: inline-block;
+	text-align: center;
+}
+.functionAreaCss image{
+	display: inline-block;
+	width: 75rpx;
+	height: 75rpx;
+}
+.functionAreaCss ._p{
+	display: block;
+	text-align: center;
+	color: #0FB9A7;
+}
+.functionList{
+	width: 750rpx;
+	/* height: 100rpx; */
+	display: inline-block;
+	border-bottom: #C8C7CC 1rpx solid;	
+	padding-bottom: 25rpx;
+	padding-top:35rpx;
+}
+.functionList_icon{
+	display: inline-block;
+	margin:5rpx 24rpx 0rpx 24rpx;
+	width: 50rpx;
+	height: 50rpx;
+}
+.functionList ._p{
+	display: inline-block;
+	padding:0rpx 24rpx 0rpx 24rpx;
+	vertical-align: top;
+}
+.functionList_fanhui{
+	display: inline-block;
+	margin:13rpx 24rpx 0rpx 24rpx;
+	width: 18rpx;
+	height: 34rpx;
+	vertical-align: top;
+	position: absolute;
+	right: 9rpx;
+}
+
+

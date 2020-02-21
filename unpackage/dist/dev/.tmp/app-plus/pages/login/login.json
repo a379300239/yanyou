@@ -1,4 +1,6 @@
 {
+  "navigationBarTitleText": "地选路线",
+  "navigationBarTextStyle": "black",
   "navigationStyle": "custom",
   "usingComponents": {}
 }

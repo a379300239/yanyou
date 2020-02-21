@@ -1,0 +1,74 @@
+
+.DayCss{
+	display: inline-block;
+	width: 40%;
+	text-align: center;
+	vertical-align: top;
+}
+.dayChooseCss{
+	padding-top: 2%;
+	padding-bottom: 2%;
+	margin-left: 43%;
+}
+.dateNumCss{
+	width: 20%;
+	text-align: center;
+	display: inline-block;
+	padding-top: 3%;
+}
+.oneDayCss{
+	margin-top: 2%;
+	padding-bottom: 2%;
+}
+.oneSiteCss{
+}
+.oneDayCss ._img{
+	text-align: right;
+	display: inline-block;
+	width: 45%;
+	height: 45%;
+}
+.chooseViewCss{
+	width: 100%;
+	text-align: center;
+	padding-bottom: 5%;
+	padding-top: 5%;
+}
+.chooseViewCss_option{
+	display: inline-block;
+	margin: 10% 5%;
+	width: 40%;
+}
+.customViewCss{
+	vertical-align:middle;
+	background: white;
+	height: 200rpx;
+	padding-top: 5%;
+	margin-bottom: 10%;
+}
+.subOrCancelCss{
+	background: white;
+	width: 100%;
+}
+.subOrCancel_subCss{
+	display: inline-block;
+	text-align: center;
+	width: 49%;
+	margin-top: 5%;
+}
+.subOrCancel_cancelCss{
+	display: inline-block;
+	text-align: center;
+	width: 50%;
+	margin-top: 5%;
+	border-right: 1rpx solid black;
+}
+.customViewCss input{
+	width: 80%;
+	text-align: center;
+	margin-left: 10%;
+	border: 1rpx solid black;		/*边框 */	/*圆角 */		
+	border-radius: 100px;
+	height:60rpx;
+}
+

@@ -1,0 +1,74 @@
+
+.cardBackgroundCss{
+	position: absolute;
+	z-index: 3;
+	width: 750rpx;
+	margin-top: 420rpx;
+	padding-left: 30rpx;
+}
+.siteCardCss{
+	width: 700rpx;
+	background-color: #FAFAFA;
+	-webkit-border-radius: 20px;	/*圆角 */
+}
+.titleCss{
+	font-size: 65rpx;
+	margin-left: 30rpx;
+	padding-top: 30rpx;
+}
+.featureCss{
+	font-size: 33rpx;
+	margin-left: 20rpx;
+	margin-top: 15rpx;
+	margin-bottom: 15rpx;
+	color: #00bec6;
+}
+.locationCss{
+	display: inline-block;
+	width: 750rpx;
+	margin-left: 20rpx;
+	margin-top: 15rpx
+}
+.locationCss_iconCss{
+	display: inline-block;
+	width: 64rpx;
+	height: 64rpx;
+}
+.locationCss ._p{
+	display: inline-block;
+	font-size: 40rpx;
+	vertical-align: bottom;
+	padding-bottom: 25rpx;
+	padding-left:15rpx;
+}
+.playTimeCss{
+	display: inline-block;
+	width: 750rpx;
+	margin-left: 20rpx;
+	margin-top: 15rpx;
+	margin-bottom:250rpx;
+}
+.playTimeCss image{
+	display: inline-block;
+	width: 64rpx;
+	height: 64rpx;
+}
+.playTimeCss ._p{
+	display: inline-block;
+	font-size: 40rpx;
+	vertical-align: bottom;
+	padding-bottom: 25rpx;
+	padding-left:15rpx;
+}
+.addButtonCss{
+	position: fixed;
+	z-index: 5;
+	width: 750rpx;
+	text-align: center;
+	bottom: 10rpx;
+}
+.addButtonCss image{
+	width: 162rpx;
+	height: 100rpx;
+}
+

@@ -1,6 +1,6 @@
 
 .navigator{
-	margin-top: 3%;
+	margin-top: 8%;
 	width: 100%;
 	font-size: 30rpx;
 }
@@ -69,22 +69,39 @@ button::after{
 	display: inline;
 	font-size: 30rpx;
 }
-.introduce_routes{
-	padding-top: 5%;
-}
-.introduce_routes_view {
+.introduce_sites_title{
+	margin-top:75rpx;
 	text-align: center;
+	height: 120rpx;
+	background-color: #F2F2F2;
+}
+.introduce_sites_title ._p{
+	padding-top: 30rpx;
+	font-size: 45rpx;
+	color: #158093;
+}
+.introduce_sites{
+	padding-top: 3%;
+}
+.introduce_sites_view {
+	width:50%;
 	position:relative;
 	display: inline-block;
 }
-.introduce_routes_text {
-	z-indenx:1;
-	background-color: #EBEBEB;
-	color: #000000;
+.introduce_sites_image{
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+	overflow:hidden;
 }
-.introduce_routes_image{
-	padding-top: 1%;
-	width: 750rpx;
-	height: 250rpx;
+.introduce_sites_image image{
+	/* width: 334rpx; */
+	-webkit-border-radius: 15rpx 15rpx 0rpx 0rpx;	/*圆角 */
+	width: 95%;
+	height: 278rpx;
+}
+.introduce_sites_text {
+	margin-bottom: 45rpx;
+	margin-left: 35rpx;
 }
 

@@ -1,74 +1,71 @@
 
-.DayCss{
+.addCardCss{
+	margin-left: 10rpx;
+	top:30rpx;
+	width: 360rpx;
+	height: 500rpx;
+	position: relative;
+	overflow: hidden;
 	display: inline-block;
-	width: 40%;
+	-webkit-border-radius: 20rpx;	/*圆角 */
+	/* text-align: center; */
+}
+.addCardCss_bgimg{
+	/* width: ; */
+	height: 500rpx;
+	position: absolute;
+	z-index: 0;
+}
+.addButtonCss_black{
+	position: absolute;
+	z-index: 1;
+	opacity: 0.7;
+	width: 360rpx;
+	height: 500rpx;
+}
+.addButtonCss_addimg{
+	width: 100rpx;
+	height: 100rpx;
+	top:180rpx;
+	left: 140rpx;
 	text-align: center;
-	vertical-align: top;
+	position: absolute;
+	z-index: 1;
 }
-.dayChooseCss{
-	padding-top: 2%;
-	padding-bottom: 2%;
-	margin-left: 43%;
+.addCardCss_statue{
+	position: absolute;
+	z-index: 1;
+	display: inline;
+	top:40rpx;
+	left: 20rpx;
+	padding: 5rpx 20rpx;
+	color: #FFFFFF;
+	-webkit-border-radius: 20rpx;	/*圆角 */
 }
-.dateNumCss{
-	width: 20%;
-	text-align: center;
-	display: inline-block;
-	padding-top: 3%;
+.addButtonCss_listChoose{
+	padding: 30rpx;
+	position: absolute;
+	z-index: 2;
+	top:35rpx;
+	right: 0rpx;
+	width: 60rpx;
+	height: 15rpx;
 }
-.oneDayCss{
-	margin-top: 2%;
-	padding-bottom: 2%;
+.addCardCss_siteName{
+	top:120rpx;
+	left: 25rpx;
+	margin-right: 30rpx;
+	position: relative;
+	z-index: 1;
+	font-size: 50rpx;
+	color: #FFFFFF;
 }
-.oneSiteCss{
-}
-.oneDayCss ._img{
-	text-align: right;
-	display: inline-block;
-	width: 45%;
-	height: 45%;
-}
-.chooseViewCss{
-	width: 100%;
-	text-align: center;
-	padding-bottom: 5%;
-	padding-top: 5%;
-}
-.chooseViewCss_option{
-	display: inline-block;
-	margin: 10% 5%;
-	width: 40%;
-}
-.customViewCss{
-	vertical-align:middle;
-	background: white;
-	height: 200rpx;
-	padding-top: 5%;
-	margin-bottom: 10%;
-}
-.subOrCancelCss{
-	background: white;
-	width: 100%;
-}
-.subOrCancel_subCss{
-	display: inline-block;
-	text-align: center;
-	width: 49%;
-	margin-top: 5%;
-}
-.subOrCancel_cancelCss{
-	display: inline-block;
-	text-align: center;
-	width: 50%;
-	margin-top: 5%;
-	border-right: 1rpx solid black;
-}
-.customViewCss input{
-	width: 80%;
-	text-align: center;
-	margin-left: 10%;
-	border: 1rpx solid black;		/*边框 */	/*圆角 */		
-	border-radius: 100px;
-	height:60rpx;
+.addCardCss_siteTime{
+	top:135rpx;
+	left: 25rpx;
+	position: relative;
+	z-index: 1;
+	font-size: 30rpx;
+	color: #FFFFFF;
 }
 

@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "自选路线",
+  "navigationBarTextStyle": "black",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-popup": "/components/uni-popup/uni-popup",
+    "uni-calendar": "/components/uni-calendar/uni-calendar",
+    "uni-swipe-action": "/components/uni-swipe-action/uni-swipe-action",
+    "uni-swipe-action-item": "/components/uni-swipe-action-item/uni-swipe-action-item",
+    "drag-sort": "/components/drag-sort/index",
+    "h-form-alert": "/components/h-form-alert/h-form-alert"
+  }
+}

@@ -5,7 +5,9 @@
     "pages/register/register",
     "pages/customizingRoute/customizingRoute",
     "pages/diyRoute/diyRoute",
-    "pages/myInformation/myInformation"
+    "pages/myInformation/myInformation",
+    "pages/siteIntroduction/siteIntroduction",
+    "pages/editRoute/editRoute"
   ],
   "window": {},
   "tabBar": {
@@ -39,13 +41,13 @@
       }
     ]
   },
-  "nvueCompiler": "weex",
+  "nvueCompiler": "uni-app",
   "renderer": "auto",
   "splashscreen": {
     "alwaysShowBeforeRender": true,
     "autoclose": false
   },
   "appname": "YanYou",
-  "compilerVersion": "2.3.7",
+  "compilerVersion": "2.5.1",
   "usingComponents": {}
 }

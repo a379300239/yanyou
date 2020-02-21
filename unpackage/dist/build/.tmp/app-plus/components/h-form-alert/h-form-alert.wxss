@@ -1,0 +1,63 @@
+.a_mask {
+  position: fixed;
+  z-index: 99999;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.a_mask .a_box {
+    width: 500rpx;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 10rpx;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+}
+.a_mask .a_box .a_head {
+      text-align: center;
+      font-size: 30rpx;
+      line-height: 88rpx;
+}
+.a_mask .a_box .a_input {
+      padding: 30rpx 20rpx;
+      font-size: 28rpx;
+}
+.a_mask .a_box .a_input input {
+        text-align: center;
+}
+.a_mask .a_box .a_btn {
+      text-align: center;
+      font-size: 30rpx;
+      line-height: 88rpx;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+              justify-content: space-between;
+      border-top: 1rpx solid #f5f5f5;
+}
+.a_mask .a_box .a_btn button {
+        width: 50%;
+        background-color: #fff;
+        font-size: 30rpx;
+        border-radius: 0rpx;
+        padding: 0;
+}
+.a_mask .a_box .a_btn button::after {
+          border: none;
+}
+.a_mask .a_box .a_btn button:first-child {
+          border-right: 1rpx solid #f5f5f5;
+          color: #999999;
+          box-sizing: border-box;
+}
+.a_mask .a_box .a_btn button:last-child {
+          color: #333;
+}
+
