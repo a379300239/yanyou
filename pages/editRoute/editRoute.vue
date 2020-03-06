@@ -1,360 +1,288 @@
 <template>
-	<view style="width: 100%; background: #FAFAFA;">
-		<!-- 留海设置
-		<view style="width: 100%; height: 65rpx; display: block; background: #000000;"></view> -->
-		
-		<!-- 日期选择 -->
-		<uni-calendar ref="calendar" :insert="false" @confirm="confirm" :range="true" style="padding-top: 8%;"></uni-calendar>
-		<view @click="open_calendar" style="padding-top:3%;border-bottom: #000000;">
-			<view>
-				<view class="DayCss">
-					出发<br>{{ goodDatePickerOption2.currentRangeStartDate }}
-				</view>
-				<view class="dateNumCss">共{{ currentDateNum }}天</view>
-				<view class="DayCss">
-					结束<br>{{ goodDatePickerOption2.currentRangeEndDate }}
-				</view>
+	<view style="background-color: #F5F5F5;">
+		<!-- 封面 -->
+		<view style="width: 750rpx; height: 400rpx; position: relative; overflow: hidden;display: flex;align-items: center;z-index: 1;">
+			<!-- 背景图 -->
+			<image :src="routeInformaion.routeImg" style="width: 750rpx; position: absolute;z-index: -1;"></image>
+			
+			<!-- 返回键 -->
+			<navigator open-type="navigateBack">
+				<image src="../../static/siteIntroduction/back.png" style="width:52rpx;height: 75rpx; position: absolute;z-index: 2;top:50rpx;margin-left: 30rpx;"></image>
+			</navigator>
+			
+			<!-- 黑色遮罩 -->
+			<image src="/static/diyRoute/black.png" style="width: 750rpx; position: absolute;z-index: 0;opacity: 0.65;"></image>
+			
+			<!-- 文字部分 -->
+			<view style="width: 750rpx; text-align: center; color: #FFFFFF;position: absolute;z-index: 1;">
+				<p style="font-size: 50rpx;">{{routeInformaion.routeName}}</p>
+				<p style="font-size: 35rpx;margin-top: 20rpx;">{{get_date(routeInformaion.routeStartTime)}}-{{get_date(routeInformaion.routeEndTime)}}</p>
 			</view>
 		</view>
 		
-		<!-- 景点选择 -->
-		<view style="margin-top: 5%;">
-			<!-- 一天的游览线路 -->
-			<!-- 第几天 -->
-			<view v-for="(oneDay,dayId) in siteRoute_all.route" style="text-align: center;">
-				<view class="oneDayCss">
-					<uni-swipe-action style="margin-top: 3%;">
-					    <uni-swipe-action-item :options="dayChoose" @click="click_day($event,dayId)" mode="day">
-					        <view class='dayChooseCss'>第{{dayId+1}}天</view>
-					    </uni-swipe-action-item>
-					</uni-swipe-action>
+		<!-- 一天 -->
+		<view v-for="(dayInformation,index) in routeInformaion.route" :key="index" style="display: inline-block;padding-top: 42rpx;width: 750rpx;">
+			<!-- 上边，天数+日期 -->
+			<view style="display: flex;align-items: center;">
+				
+				<view style="position: relative;display: flex;align-items: center;justify-content: center;z-index: 0;margin-left: 30rpx;">
+					<!-- 天数：D1 -->
+					<image src="/static/editRoute/number_icon.png" style="width: 56rpx;height: 56rpx;position: absolute;z-index: 0;"></image>
+					<p style="position: relative; z-index: 2;color: #FFFFFF;font-size: 30rpx;">D{{index+1}}</p>
 				</view>
 				
-				<!-- 景点 -->
-				<view v-for="(onesite,currentSiteIndex) in oneDay">
-					<view class="oneSiteCss">
-						<view style="display: inline-block; width: 90%; text-align: left;">
-							<uni-swipe-action>
-							    <uni-swipe-action-item :options="siteChoose" @click="click_site($event,dayId,currentSiteIndex)" mode="site">
-							        <view>{{currentSiteIndex+1}}、{{onesite.siteName}}</view>
-							    </uni-swipe-action-item>
-							</uni-swipe-action>
-						</view>
+				<!-- 日期 -->
+				<p style="position: relative;margin-left: 30rpx;">{{get_nextDate(routeInformaion.routeStartTime,index)}}</p>
+				
+				<!-- 调整按钮，当日期内有天数且没有在操作（删除）时，出现 -->
+				<navigator :url="modifySiteUrl(index)" v-if="dayInformation.length!=0 && isOperating==false" style="display: flex;align-items: center;position: absolute;right: 30rpx;">
+					<view>
+						<p style="border-radius: 40rpx; border: 1rpx solid #000000; width: 120rpx; height: 51rpx; font-size: 36rpx; letter-spacing: 1rpx; background-color: #F5F5F5; display: inline-block; text-align: center;padding: 3rpx 15rpx 3rpx 15rpx;">调整</p>
+					</view>
+				</navigator>
+				
+				<!-- 删除界面，删除时出现 -->
+				<view style="display: flex;align-items: center;" v-if="isDeleting">
+					<!-- 复选框 -->
+					<checkbox style="position: absolute;right: 30rpx;" @click="choose_delete(index)"></checkbox>
+					
+					<!-- 确认按钮 -->
+					<view style="position: fixed;bottom: 30rpx;z-index: 99; width: 750rpx;left: 0rpx;text-align: center;">
+						<button style="width: 300rpx;background-color: #E3E3E3;color: #000000;display: inline-block;margin-right: 50rpx;" @click="cancel_delete">取消</button>
+						<button style="width: 300rpx;background-color: #FF0000;color: #FFFFFF;display: inline-block;" @click="confirm_delete">删除</button>
 					</view>
 				</view>
-				
-				<!-- <dragSort :list="siteRoute_all.route[dayId]" :props="props" @change="onDragSortChange"></dragSort> -->
-				<!-- 因使用侧滑框，该按钮废弃			 -->
-				<!-- <button @click="open_chooseView(currentDayIndex)" style="width: 80%;margin-bottom: 2%; margin-top: 2%;">增加路线</button>	 -->
+
 			</view>
 			
-			<!-- 日期更改框 -->
-			<hFormAlert v-if="modifyDayInputShow"  name="modifyDayView" placeholder="更改至第几天？" @confirm="comfirm_modifyDay" @cancel="cancel_modifyDay"></hFormAlert>
-			<hFormAlert v-if="modifySiteInputShow"  name="modifySiteView" placeholder="更改至第几个景点？" @confirm="comfirm_modifySite" @cancel="cancel_modifySite"></hFormAlert>
 			
-			<!-- 因使用侧滑框，该按钮废弃			 -->
-			<!-- 增加日期按钮
-			<view @click="add_day" style="margin-top: 3%;">
-				<button>增加一天</button>
-			</view> -->
-			
-			<uni-popup ref="chooseView" type="center">
-				<view class="chooseViewCss">
-					 <view class="chooseViewCss_option">
-							<picker @columnchange="change_site" @change="add_site('site')" mode="multiSelector" :range="currentSitesList" :value="currentSiteIndex"><button @click="load_data('site')">景区</button></picker>
-					 </view>
-					 					 
-					 <view class="chooseViewCss_option">
-						<picker @columnchange="change_site" @change="add_site('restaurant')" mode="multiSelector" :range="currentSitesList" :value="currentSiteIndex"><button @click="load_data('restaurant')">吃饭</button></picker>
-					 </view>
-										  
-					 <view class="chooseViewCss_option">
-						<picker @columnchange="change_site" @change="add_site('hotel')" mode="multiSelector" :range="currentSitesList" :value="currentSiteIndex"><button @click="load_data('hotel')">住宿</button></picker>
-					 </view>
-					 
-					<view class="chooseViewCss_option">
-						<button>交通</button>
-					 </view>
-					 
-					 <view class="chooseViewCss_option">
-					 	<button @click="open_customView">自定义</button>	
-					  </view>
-					 
-				</view>
-				
-				<!-- 弹出层 -->
-				<!-- 吃饭选择 -->
-				<uni-popup ref="customView" type="bottom">
-					<view class="customViewCss">
-						<input style="background: white;" type="text" v-model="currentSite"/>
-						<view class="subOrCancelCss">
-							<view class="subOrCancel_cancelCss" @click="cancel_custom">取消</view>
-							<view class="subOrCancel_subCss" @click="sub_custom">确认</view>
+			<!-- 有行程 -->
+			<view v-if="dayInformation.length!=0">
+				<!-- 下边，竖线、行程 -->
+				<!-- 单个景点 -->
+				<view v-for="(siteInformation,index) in dayInformation" class="routeCss" :key="index">
+					
+					<!-- 景点、美食、酒店 -->
+					<navigator
+						:url="basicUrl+siteInformation.siteName"
+						v-if="siteInformation.siteType=='site' || siteInformation.siteType=='food' || siteInformation.siteType=='hotel'">
+						<view class="routeCss_content">
+							<view class="routeCss_text">
+								<p class="siteNameCss">{{siteInformation.siteName}}</p>
+								<p class="sitePlayTimeCss">建议游玩{{siteInformation.sitePlayTime}}</p>
+								<p class="siteGradeCss">评分{{siteInformation.siteGrade}}分</p>
+							</view>
+							
+							<view class="routeCss_img">
+								<view class="siteImgCss">
+									<image :src="siteInformation.siteImg"></image>
+								</view>
+							</view>
 						</view>
+					</navigator>
+					
+					<!-- 交通 -->
+					<view v-if="siteInformation.siteType=='traffic'" class="routeCss_content trafficCss">
+						<p>{{siteInformation.startPlace}}-{{siteInformation.endPlace}} {{siteInformation.vehicle}}</p>
 					</view>
-				</uni-popup>
-			</uni-popup>
+					
+					
+					<!-- 自定义 -->
+					<view v-if="siteInformation.siteType=='custom'" class="routeCss_content customCss">
+						<p class="customCss_title">{{siteInformation.title}}</p>
+						<p class="customCss_content">{{siteInformation.content}}</p>
+					</view>
+					
+				</view>
+			</view>
+			
+			<!-- 无行程 -->
+			<view v-else class="routeCss">
+				<navigator :url="modifySiteUrl(index)">
+					<view class="routeCss_noRouteCss">
+						<p>+添加行程</p>
+					</view>
+				</navigator>
+			</view>
+			
 		</view>
 		
-		<view style="position: fixed;z-index: 5;width: 750rpx;text-align: center;bottom: 20rpx;">
-			<input v-model="routeName" style="border:1rpx solid black ;display: inline-block;width: 500rpx;margin-bottom: 20rpx;"/>
-			<button style="margin-left: 20rpx; width: 200rpx;display: inline-block;" @click="save_route" >保存</button>
+		<!-- 悬浮菜单 -->
+		<uni-fab 
+			ref="fab"
+			:content="menuContent" 
+			v-if="isPopMenu"
+			:popMenu="isPop"
+			horizontal="right" 
+			vertical="bottom" 
+			direction="vertical"
+			@trigger="click_fab" 
+			@fabClick="click_menuButton" />
+			
+		<!-- 弹出层，修改日期 -->
+		<view v-if="isPopUp" class="myPopupCss" @touchmove.stop.prevent="moveHandle">
+			<view class="black_card"></view>
+			<view class="modifyDayViewCss">
+				<view class="modifyDayViewCss_dateCss" :value="modifyBeforeDate">
+					<p>要修改的日期</p>
+					<picker-view @change="modify_date($event,'beforeDate')">
+						<picker-view-column>
+							<view v-for="(day,index) in routeInformaion.route" :key="index">{{get_nextDate(routeInformaion.routeStartTime,index)}}</view>
+						</picker-view-column>
+					</picker-view>
+				</view>
+				
+				<view class="modifyDayViewCss_dateCss">
+					<p>修改至哪一天</p>
+					<picker-view @change="modify_date($event,'afterDate')">
+						<picker-view-column>
+							<view v-for="(day,index) in routeInformaion.route" :key="index" >{{get_nextDate(routeInformaion.routeStartTime,index)}}</view>
+						</picker-view-column>
+					</picker-view>
+				</view>
+				
+				<!-- 按钮 -->
+				<view style="display: flex; justify-content: space-around;">
+					<button class="modifyDayViewCss_cancel" @click="cancel_modify">取消</button>
+					<button class="modifyDayViewCss_confirm" @click="confirm_modify">确认</button>
+				</view>
+			</view>
 		</view>
 		
 	</view>
 </template>
 
 <script>
-	import uniCalendar from '@/components/uni-calendar/uni-calendar.vue'							//日历
-	import uniPopup from '@/components/uni-popup/uni-popup.vue'										//弹窗
-	import uniSwipeAction from '@/components/uni-swipe-action/uni-swipe-action.vue'
-	import uniSwipeActionItem from '@/components/uni-swipe-action-item/uni-swipe-action-item.vue'	//侧滑
-	import dragSort from '@/components/drag-sort/index.vue'											//拖拽
-	import hFormAlert from '@/components/h-form-alert/h-form-alert.vue';							//弹窗输入
-
+	import uniFab from '@/components/uni-fab/uni-fab.vue';			//悬浮菜单
+	import uniPopup from "@/components/uni-popup/uni-popup.vue"				//弹出层
+	
 	export default {
-		data() {	
+		data() {
 			return {
-				props:{
-					label: 'siteName'
-				},
-/*-----------------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------*/
-				/*日期数据*/
-				// 配置时间区间不超过一年
-				goodDatePickerOption2: { 
-					currentRangeStartDate: ' ',
-					currentRangeEndDate: ' ',
-					// initStartDate: ' ', //可选起始时间，可为空,默认今天
-					// initEndDate: '2022-12-30', //可选结束时间，可为空,默认12个月后
-					isRange: true ,//是否开启范围选择，必填
-				},
-								
-/*-----------------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------*/
-				/*景点选择*/
-				dayChoose:[				//日期选项
-					{
-						text: '增加一天',
-						style: {
-						}
+				routeId:"",
+				userInformation:"",				//用户信息
+				routeInformaion:{}			,	//路线信息
+				basicUrl:"../siteIntroduction/siteIntroduction?isEdit=false&siteName=",
+				//悬浮菜单内容
+				menuContent:[{
+						text: '修改行程信息',
+						active: false
 					},
 					{
-						text: '修改一天',
-						style: {
-							backgroundColor: 'rgb(205,129,131)'
-						}
+						text: '增加一天',
+						active: false
 					},
 					{
 						text: '删除一天',
-						style: {
-							backgroundColor: 'rgb(255,58,49)'
-						}
+						active: false
 					},
 					{
-						text: '增加景点',
-						style: {
-							backgroundColor: 'rgb(254,156,1)'
-						},
+						text: '修改一天',
+						active: false
 					}
 				],
-				siteChoose:[				//景点选项
-					{
-						text: '增加景点',
-						style: {
-						}
-					},
-					{
-						text: '删除景点',
-						style: {
-							backgroundColor: 'rgb(255,58,49)'
-						}
-					},
-					{
-						text: '修改景点',
-						style: {
-							backgroundColor: 'rgb(254,156,1)'
-						},
-					}
-				],
-				modifyDayInputShow:false,
-				modifySiteInputShow:false,
-				currentDayId:"",
-				currentDayIndex:"",		//当前选择日期
-				currentSiteId:"",		//当前选择景点ID
-				currentSite:"",			//当前选择景点
-				currentSiteIndex:[0,0,0],
-				currentSitesList:[],	//复选框中景点列表
-				currentSitesList_all:[],//复选框所有景点列表
-				sites:{//应有景点数据
-					province:['四川','陕西'],
-					city:[
-						['成都','都江堰','内江','大邑'],
-						['西安','延安']
-					],
-					sites:[
-						[
-							['熊猫基地','成都理工大学'],
-							['都江堰','青城山'],
-							['张大千纪念馆','内江小面'],
-							['安仁古镇','建川博物馆','刘氏庄园']
-						],
-						[
-							['城墙','大唐不夜城'],
-							['景点1','景点2']
-						]
-					]					
-				},
-				restaurant:{//应有景点数据
-					province:['四川','陕西'],
-					city:[
-						['成都','都江堰','内江','大邑'],
-						['西安','延安']
-					],
-					sites:[
-						[
-							['成都饭店1','成都饭店2'],
-							['都江堰饭店1','都江堰饭店2'],
-							['内江饭店1','内江饭店2'],
-							['大邑饭店1','大邑饭店2','大邑饭店3']
-						],
-						[
-							['西安饭店1','西安饭店2'],
-							['延安饭店1','延安饭店2']
-						]
-					]					
-				},
-				hotel:{//应有景点数据
-					province:['四川','陕西'],
-					city:[
-						['成都','都江堰','内江','大邑'],
-						['西安','延安']
-					],
-					sites:[
-						[
-							['成都酒店1','成都酒店2'],
-							['都江堰酒店1','都江堰酒店2'],
-							['内江酒店1','内江酒店2'],
-							['大邑酒店1','大邑酒店2','大邑酒店3']
-						],
-						[
-							['西安酒店1','西安酒店2'],
-							['延安酒店1','延安酒店2']
-						]
-					]					
-				},
-				//路线数据
-				/*
-				格式：
-					{
-						"routeImg":"",
-						"routeStartTime":"",
-						"routeEndTime":"",
-						"routeDay":"",
-						"route":
-						[	//第几天
-							[{	//第几个
-								"siteType":"site/restaurant/hotel/traffic/custom",
-								"siteName":"",
-								"siteImg":"",
-								"sitePlayTime":"",
-								"siteGrade":""
-							},],
-						]
-					}	
-
-				*/
-			   	siteRoute_all:{
-					routeImg:"",
-					routeStartTime:"",
-					routeEndTime:"",
-					routeDay:"",
-					route:[]
-				},
-				routeName:"",
-				userInformation:"",
-			}
-		},
-		components: {
-			uniPopup,				//弹窗
-			uniCalendar,			//日历
-			uniSwipeAction,
-			uniSwipeActionItem,		//侧滑
-			dragSort,				//拖拽
-			hFormAlert,				//弹窗输入
-		},
-		computed: {
-			//旅游持续时间
-			currentDateNum:function(){
-				if(this.goodDatePickerOption2.currentRangeStartDate==' ')
-					return 0;
-				return this.dateSpace(this.goodDatePickerOption2.currentRangeStartDate, this.goodDatePickerOption2.currentRangeEndDate);
+				isPopMenu:true,			//是否使用悬浮按钮
+				isPop:true,			//是否弹出
+				userRoute:{},
+				isOperating:false,
+				isDeleting:false,		//是否正在删除
+				deleteDayNum:[],		//记录应删除的位置
+				maskClick:false,		//禁止点击取消
+				modifyBeforeDate:[0],	
+				modifyAfterDate:[0],	//修改前、后日期
+				isPopUp:false,
 			}
 		},
 		methods: {
-			onLoad:function(routeName) {
-				//获得用户数据
+			onLoad:function(e){
+				// 用户信息
 				this.userInformation=uni.getStorageSync("currentUser");
-				//加载应有景点数据
-				this.load_siteData(this.sites);
-				//加载路线数据
-				if(JSON.stringify(routeName) != '{}'){
-					this.load_routeData(routeName['routeName']);
-				}
+				// 用户路线
+				this.routeId=e.routeId;
+				this.userRoute=uni.getStorageSync(this.userInformation.userName+"_route");
+				this.routeInformaion=this.userRoute[this.routeId];
+				
 			},
 			onShow:function(){
+				// 用户信息
+				this.userInformation=uni.getStorageSync("currentUser");
+				// 当前路线
+				this.userRoute=uni.getStorageSync(this.userInformation.userName+"_route");
+				this.routeInformaion=this.userRoute[this.routeId];
 			},
-			/*-----------------------------------------------------------------------------------------------------------------
-			-----------------------------------------------------------------------------------------------------------------*/
-			/*所有数据的操作*/
-			inital_siteRouteAll:function(){
-				this.siteRoute_all={
-					routeImg:"",
-					routeStartTime:"",
-					routeEndTime:"",
-					routeDay:"",
-					route:[]
+			onBackPress:function(options){
+				// 正在删除
+				if(this.isDeleting){
+					this.cancel_delete();
+					return true;
 				}
-			},
-/*-----------------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------*/
-			/*日期*/
-			//计算日期差
-			dateSpace(sDate1, sDate2) { //sDate1和sDate2是2006-12-18格式 得出量日期之间的天数
-				var dateSpan, tempDate, iDays;
-				sDate1 = Date.parse(sDate1);
-				sDate2 = Date.parse(sDate2);
-				dateSpan = sDate2 - sDate1;
-				dateSpan = Math.abs(dateSpan);
-				iDays = Math.floor(dateSpan / (24 * 3600 * 1000));
-				return iDays+1;
-			},
-			//打开日历，进行日期选择
-			open_calendar(){
-				this.$refs.calendar.open();
-			},
-			//日历确认后逻辑
-			confirm(e) {
-				//设置开始结束日期
-				if (e.range.before=="" || e.range.after==""){ //单选
-					this.goodDatePickerOption2.currentRangeStartDate=e.fulldate;
-					this.goodDatePickerOption2.currentRangeEndDate=e.fulldate;
-				} 
-				else{ //多选
-					this.goodDatePickerOption2.currentRangeStartDate=e.range.before;
-					this.goodDatePickerOption2.currentRangeEndDate=e.range.after;
+				//正在修改
+				else if(this.isPopUp){
+					this.cancel_modify();
+					return true;
 				}
-				
-				//设置天数
-				var i=0;
-				this.inital_siteRouteAll() //清空天数
-				for(i;i<this.currentDateNum;i++){
-					this.siteRoute_all['route'].push([]);
+				//悬浮菜单打开
+				else if(this.$refs.fab.isShow){
+					this.$refs.fab.close();
+					return true;
 				}
+				return false;
 				
 			},
 			//得到输入data的后day天
 			get_nextDate:function (date,day) {
+				var week=['日','一','二','三','四','五','六']
+				
+				var s=date.split('-');
+				var nDate=new Date(parseInt(s[0]),parseInt(s[1])-1,parseInt(s[2]));
+				var nextDate=new Date(Date.parse(nDate)+day*24*60*60*1000);
+				var year=nextDate.getFullYear();
+				var mon=nextDate.getMonth()+1;
+				var day=nextDate.getDate();
+				var weekDay=week[nextDate.getDay()];
+				return mon+'月'+day+'日'+' 周'+weekDay;
+			},
+			//标题显示
+			get_date:function(date){
+				var s=date.split('-');
+				var nDate=new Date(parseInt(s[0]),parseInt(s[1])-1,parseInt(s[2]));
+				var year=nDate.getFullYear();
+				var mon=nDate.getMonth()+1;
+				var day=nDate.getDate();
+				return mon+'月'+day+'日'
+			},
+			//点击悬浮菜单按钮
+			click_fab:function(e){
+				switch (e.index){
+					case 0:this.modify_routeInformation();break;
+					case 1:this.add_day();break;
+					case 2:this.delete_day();break;
+					case 3:this.modify_day();break;
+					default:
+						break;
+				}
+			},
+			//点击菜单内按钮
+			click_menuButton:function(e){
+			},
+			//修改行程信息
+			modify_routeInformation:function(){
+				uni.navigateTo({
+					url:"modify_routeInformation/modify_routeInformation?routeId="+this.routeId
+				})
+			},
+			//更新日期，增加或者减少day天,更新日期及天数
+			update_date:function(day){
+				this.routeInformaion.routeDay+=day;
+				this.routeInformaion.routeEndTime=this.get_nextDate_func(this.routeInformaion.routeEndTime,day);
+			},
+			//增加一天
+			add_day:function(){
+				this.routeInformaion.route.push([]);
+				this.update_date(1);
+				this.save();
+			},
+			get_nextDate_func:function (date,day) {
 				var s=date.split('-');
 				var nDate=new Date(parseInt(s[0]),parseInt(s[1])-1,parseInt(s[2]));
 				var nextDate=new Date(Date.parse(nDate)+day*24*60*60*1000);
@@ -363,366 +291,294 @@
 				var day=nextDate.getDate() < 10 ? '0' + nextDate.getDate() : nextDate.getDate();
 				return year+'-'+mon+'-'+day;
 			},
-			/**********************************************************/
-			/*天数操作*/
-			//日期操作
-			click_day:function(e,dayId){
-				switch(e.content.text){
-					case "增加一天":this.add_day(dayId);break;
-					case "修改一天":this.modify_day(dayId);break;
-					case "删除一天":this.delete_day(dayId);break;
-					case "增加景点":this.open_chooseView(dayId,0);break;
-				}
+			over_operate:function(){
+				this.isOperating=false;
+				this.isPopMenu=true;
 			},
-			//增加一天
-			add_day:function(dayId){
-				if (this.goodDatePickerOption2.currentRangeStartDate==" "|| this.goodDatePickerOption2.currentRangeEndDate==" "){
-					uni.showToast({
-						title:"请选择日期",
-						duration:2000,
-						icon:"none"
-					});
-				}
-				else{
-					//结束日期往后移一天
-					this.goodDatePickerOption2.currentRangeEndDate=this.get_nextDate(this.goodDatePickerOption2.currentRangeEndDate,1);
-					
-					
-					this.siteRoute_all['route'].splice(dayId+1,0,[]);
-					
-					// for(var i=dayId;i<this.siteRoute_all.length;i++){							//重新进行日期编号
-					// 	this.siteRoute_all[i].dayNum=i+1;
-					// }
-				}	
-
+			start_operate:function(){
+				this.isOperating=true;
+				this.isPopMenu=false;
 			},
 			//删除一天
-			delete_day:function(dayId){
-				//删除元素
-				this.siteRoute_all['route'].splice(dayId,1);
-				//数组元素存在时，更改数组元素
-				if(this.siteRoute_all['route'].length!=0){
-					// for(var i=dayId;i<this.siteRoute_all.length;i++){
-					// 	this.siteRoute_all[i].dayNum=i+1;
-					// }
-					this.goodDatePickerOption2.currentRangeEndDate=this.get_nextDate(this.goodDatePickerOption2.currentRangeEndDate,-1);
+			delete_day:function(){
+				for(var i=0;i<this.routeInformaion.route.length;i++){
+					this.deleteDayNum[i]=false;
 				}
-				else{
-					this.goodDatePickerOption2.currentRangeStartDate=' ';
-					this.goodDatePickerOption2.currentRangeEndDate=' ';
-				}
+				//操作中，调整按钮消失
+				this.start_operate();
+				//删除中，出现复选框
+				this.isDeleting=!this.isDeleting;
 			},
+			//点击复选框
+			choose_delete:function(index){
+				this.deleteDayNum[index]=!this.deleteDayNum[index];
+			},
+			//确认删除
+			confirm_delete:function(){
+				//利用cach数组保存删除后数组
+				var cach=[],j=0;
+				for(var i=0;i<this.routeInformaion.route.length;i++){
+					//若为选中，则保存到cach
+					if(this.deleteDayNum[i]!=true){
+						cach[j]=this.routeInformaion.route[i];
+						j++;
+					}
+					//删除一天
+					else{
+						this.update_date(-1);
+					}
+				}
+				this.routeInformaion.route=cach;
+				
+				//操作结束,复选框消失
+				this.over_operate();
+				this.isDeleting=false;
+				//保存当前操作到数据库
+				this.save();
+			},
+			
+			//取消删除
+			cancel_delete:function(){
+				//操作结束，复选框消失
+				this.over_operate();
+				this.isDeleting=false;
+			},
+			
 			//修改一天
-			modify_day:function(dayId){
-				this.modifyDayInputShow=true;
-				this.currentDayId=dayId;
+			modify_day:function(){
+				this.start_operate();
+				// this.$refs.showModifyDayView.open();
+				this.open_myPopup();
 			},
-			comfirm_modifyDay:function(e){
-				//检验合法性
-				if(Number(e.modifyDayView)>=0 && Number(e.modifyDayView)<=this.siteRoute_all['route'].length){
-					var startDayId=this.currentDayId;
-					var aimDayId=e.modifyDayView-1;
-					
-					this.siteRoute_all['route'].splice(aimDayId+Number(startDayId<aimDayId),0,this.siteRoute_all['route'][startDayId]);	//插入
-					this.siteRoute_all['route'].splice(startDayId+Number(startDayId>aimDayId),1)								//删除原来
-					// for(var i=0;i<this.siteRoute_all.length;i++){							//重新进行日期编号
-					// 	this.siteRoute_all[i].dayNum=i+1;
-					// }
-					
 			
-					//隐藏
-					this.modifyDayInputShow=false;
-				}
-				else{
-					uni.showToast({
-						title:"请输入合法天数",
-						duration:2000,
-						icon:"none"						
-					});
-				}
+			//打开选择框
+			open_myPopup:function(){
+				//显示
+				this.isPopUp=true;
+				//默认值清零
+				this.modifyBeforeDate=0;
+				this.modifyAfterDate=0;
 			},
-			cancel_modifyDay:function(){
-				this.modifyDayInputShow=false;
+			//禁止滚动形式需要
+			moveHandle:function(){
 			},
-			//保存路线
-			save_route:function(){
-				if(this.routeName){
-					//加入日期数据
-					this.siteRoute_all['routeImg']=="../../static/editRoute/img1.jpg";
-					this.siteRoute_all['routeStartTime']=this.goodDatePickerOption2.currentRangeStartDate;
-					this.siteRoute_all['routeEndTime']=this.goodDatePickerOption2.currentRangeEndDate;
-					this.siteRoute_all['routeDay']=this.dateSpace(this.goodDatePickerOption2.currentRangeStartDate, this.goodDatePickerOption2.currentRangeEndDate);;
-					try{
-						var routesInDatabase=uni.getStorageSync(this.userInformation.userName+"_route");	//获得当前用户已有数据
-						if(routesInDatabase){		//用户有数据
-							//添加数据
-							routesInDatabase[this.routeName]=this.siteRoute_all;
-						}
-						else{						//用户无数据
-							//新建用户数据
-							var routesInDatabase={};
-							routesInDatabase[this.routeName]=this.siteRoute_all;
-						}
-						
-						//数据加入数据库
-						uni.setStorageSync(this.userInformation.userName+"_route",routesInDatabase);
-					}
-					catch(e){
-					}
-					uni.showToast({
-						title:"操作成功"
-					});
-					uni.switchTab({
-						url:"../diyRoute/diyRoute"
-					});
-				}
+			
+			//关闭选择框
+			close_myPopup:function(){
+				this.isPopUp=false;
 			},
-/*-----------------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------*/	
-			/*景点*/
-			/**********************************************************/
-			//景点操作
-			click_site:function(e,dayId,siteId){
-				switch(e.content.text){
-					case "增加景点":this.open_chooseView(dayId,siteId);break;
-					case "删除景点":this.delete_site(dayId,siteId);break;
-					case "修改景点":this.modify_site(dayId,siteId);break;
-				}
-			},
-			//提前加载数据
-			load_data:function(type){
+			
+			//当日期修改时
+			modify_date:function(e,type){
 				switch (type){
-					//景点
-					case 'site':{
-						this.load_siteData(this.sites);
+					case "beforeDate":{
+						this.modifyBeforeDate=e.detail.value[0];
 					}break;
-					case 'restaurant':{
-						this.load_siteData(this.restaurant);
+					case "afterDate":{
+						this.modifyAfterDate=e.detail.value[0];
 					}break;
-					case 'hotel':{
-						this.load_siteData(this.hotel);
-					}break;
+					default:
+						break;
 				}
 			},
-			//加载路线数据
-			load_routeData:function(routeName){
-				var routeInformation=uni.getStorageSync(this.userInformation.userName+"_route")[routeName];								//获得当前用户路线数据
-				this.siteRoute_all=routeInformation;											//路线详细数据
-				this.goodDatePickerOption2.currentRangeStartDate=routeInformation['routeStartTime'];
-				this.goodDatePickerOption2.currentRangeEndDate=routeInformation['routeEndTime'];		//路线开始时间、结束时间
-				this.routeName=routeName;
-			},
-			load_siteData:function(cacheSiteList){
-				//重置列表数据
-				this.currentSitesList=[];
-				this.currentSiteIndex=[0,0,0]
-				this.currentSitesList_all=cacheSiteList;
-				//默认景点
-				this.currentSite=cacheSiteList.sites[this.currentSiteIndex[0]][this.currentSiteIndex[1]][this.currentSiteIndex[2]];
-				//更新景点选择列表
-				this.currentSitesList.push(cacheSiteList.province);
-				this.currentSitesList.push(cacheSiteList.city[0]);
-				this.currentSitesList.push(cacheSiteList.sites[0][0]);
-			},
-			//打开景点选择弹窗
-			open_chooseView:function(dayId,siteId){
-				this.currentDayIndex=dayId;
-				this.currentSiteId=siteId;
-				this.$refs.chooseView.open();
-			},
-			//增加景点
-			add_site:function(siteType){
-				//关闭chooseView
-				this.$refs.chooseView.close();
-				this.siteRoute_all['route'][this.currentDayIndex].splice(this.currentSiteId+1,0,{
-																					siteType:siteType,
-																					siteName:this.currentSite,
-																					siteImg:"",
-																					sitePlayTime:"",
-																					siteGrade:""
-																				});
-				// console.log(this.siteRoute_all[this.currentDayIndex].siteRoute_oneDay)
-			},
-			//复选框改变时触发
-			change_site:function(e){
-				//记录更改
-				this.currentSiteIndex[e.detail.column]=e.detail.value
-				if (e.detail.column != 2)
-					this.currentSiteIndex[e.detail.column+1]=0
-				//市
-				this.currentSitesList[1]=this.currentSitesList_all.city[this.currentSiteIndex[0]]
-				//景点
-				this.currentSitesList[2]=this.currentSitesList_all.sites[this.currentSiteIndex[0]][this.currentSiteIndex[1]]
-				//当前景点
-				this.currentSite=this.currentSitesList_all.sites[this.currentSiteIndex[0]][this.currentSiteIndex[1]][this.currentSiteIndex[2]]
-			},
-			//删除景点
-			delete_site:function(dayId,siteId){
-				this.siteRoute_all['route'][dayId].splice(siteId,1);
-			},
-			//更改景点
-			modify_site:function(dayId,siteId){
-				this.modifySiteInputShow=true;
-				this.currentDayId=dayId;
-				this.currentSiteId=siteId;
-			},
-			comfirm_modifySite:function(e){
-				//检验合法性
-				if(Number(e.modifySiteView)>=0 && Number(e.modifySiteView)<=this.siteRoute_all['route'][this.currentDayId].length){
-					var startSiteId=this.currentSiteId;
-					var aimSiteId=Number(e.modifySiteView)-1;
-					// console.log(startSiteId,aimSiteId);
-					
-					this.siteRoute_all['route'][this.currentDayId].splice(aimSiteId+Number(startSiteId<aimSiteId),0,this.siteRoute_all['route'][this.currentDayId][startSiteId]);	//插入
-					this.siteRoute_all['route'][this.currentDayId].splice(startSiteId+Number(startSiteId>aimSiteId),1)								//删除原来
-					// for(var i=0;i<this.siteRoute_all.length;i++){							//重新进行日期编号
-					// 	this.siteRoute_all[i].dayNum=i+1;
-					// }
-					
 			
-					//隐藏
-					this.modifySiteInputShow=false;
-				}
-				else{
-					uni.showToast({
-						title:"请输入合法天数",
-						duration:2000,
-						icon:"none"						
-					});
-				}
+			//确认修改
+			confirm_modify:function(){
+				this.routeInformaion.route.splice(this.modifyAfterDate+Number(this.modifyBeforeDate<this.modifyAfterDate),0,this.routeInformaion.route[this.modifyBeforeDate]);	//插入
+				this.routeInformaion.route.splice(this.modifyBeforeDate+Number(this.modifyBeforeDate>this.modifyAfterDate),1)								//删除原来
+				//结束操作、关闭选择框、保存
+				this.over_operate();
+				this.close_myPopup();
+				this.save();
 			},
-			cancel_modifySite:function(){
-				this.modifySiteInputShow=false;
-			},
-
-
-			/**********************************************************/
-			/*增加吃饭*/
 			
-			/**********************************************************/
-			/*增加住宿*/
-			
-			/**********************************************************/
-			/*增加交通*/
-			
-			/**********************************************************/
-			/*增加自定义*/
-			//打开自定义view
-			open_customView:function(e){
-				this.$refs.customView.open();
+			//取消修改
+			cancel_modify:function(){
+				this.over_operate();
+				this.close_myPopup();
+				
 			},
-			//提交自定义路线
-			sub_custom:function(e){
-				if(this.currentSite==""){
-					uni.showToast({	
-						title:"请输入自定义景点",
-						duration:2000,
-						icon:"none"						
-					});
-				}
-				else{
-					this.add_site('custom');
-					//关闭自定义框及选择框	
-					this.$refs.chooseView.close();
-					this.$refs.customView.close();
-				}
+			
+			//保存当前信息到数据库
+			save:function(){
+				this.userRoute[this.routeId]=this.routeInformaion;
+				uni.setStorageSync(this.userInformation.userName+"_route",this.userRoute);
 			},
-			//取消自定义
-			cancel_custom:function(e){
-				this.$refs.customView.close();
+			//跳转到新页面URL
+			modifySiteUrl:function(dayId){
+				var url="modifySite/modifySite?routeId="+this.routeId+"&dayId="+dayId;
+				return url;
 			}
+			
+		},
+		components:{
+			uniFab,
+			uniPopup
 		}
 	}
 </script>
 
 <style>
-.DayCss{
+.routeCss{
+	position: relative;
 	display: inline-block;
-	width: 40%;
-	text-align: center;
+	border-left: 1rpx solid #C8C7CC;
+	margin-left: 48rpx;
+	padding-top: 44rpx;
+	padding-left: 44rpx;
+}
+
+.routeCss_noRouteCss{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 620rpx;
+	background-color: #EBEBEB;
+	margin: 65rpx 0 65rpx 0;
+	padding: 44rpx 0 44rpx 0;
+	border-radius: 20rpx;
+}
+
+.routeCss_noRouteCss p{
+	color: #0792ab;
+}
+
+.routeCss_content{
+	width: 620rpx;
+	position: relative;
+	border-radius: 30rpx;
+	background-color: #FFFFFF;
+	display: inline-block;
+}
+
+.routeCss_text{
 	vertical-align: top;
+	display: inline-block;
+	padding: 26rpx 40rpx 26rpx 40rpx;
+}
+
+.routeCss_img{
+	vertical-align: bottom;
+	display: inline-block;
+	margin-left: 20rpx;
+}
+
+.siteNameCss{
+	font-size: 35rpx;
+}
+
+.sitePlayTimeCss{
+	margin-top: 46rpx;
+	color: #666666;
+	font-size: 32rpx;
+}
+
+.siteGradeCss{
+	margin-top: 20rpx;
+	color: #666666;
+	font-size: 32rpx;
+}
+
+.siteImgCss{
+	position: absolute;
+	right: 30rpx;
+	bottom: 30rpx;
+	width: 225rpx; 
+	height: 130rpx; 
+	overflow: hidden;
+	border-radius: 20rpx;
+}
+
+.siteImgCss image{
+	width: 225rpx;
+	height: 130rpx; 
+}
+
+.trafficCss{
+	text-align: center;
+	padding: 40rpx 0 40rpx 0;
+}
+
+.customCss{
+	padding: 20rpx 0 20rpx 20rpx;
+}
+
+.customCss_title{
 	
 }
 
-.dayChooseCss{
-	padding-top: 2%;
-	padding-bottom: 2%;
-	margin-left: 43%;
+.customCss_content{
+	margin-top: 20rpx;
+	color: #666666;
+	font-size: 32rpx;
 }
 
+.myPopupCss{
+	width: 750rpx;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	position: fixed; 
+	z-index: 3;
+	top:0rpx;
+	padding: 25rpx;
+}
 
-.dateNumCss{
-	width: 20%;
+.black_card{
+	width: 750rpx;
+	height: 100%;
+	position: absolute;
+	left: 0rpx;
+	z-index: 3;
+	background-color: #000000;
+	opacity: 0.6;
+	
+}
+
+.modifyDayViewCss{
+	position: relative;
+	z-index: 3;
 	text-align: center;
+	background-color: #F5F5F5;
+	width: 700rpx;
+	border-radius: 20rpx;
+	padding:20rpx 0 20rpx 0;
+}
+
+.modifyDayViewCss_confirm{
 	display: inline-block;
-	padding-top: 3%;
+	width: 300rpx;
+	background-color: #007AFF;
+	color: #FFFFFF;
 }
 
-.oneDayCss{
-	margin-top: 2%;
-	padding-bottom: 2%;
-}
-
-.oneSiteCss{
-}
-
-
-.oneDayCss img{
-	text-align: right;
+.modifyDayViewCss_cancel{
 	display: inline-block;
-	width: 45%;
-	height: 45%;
+	width: 300rpx;
+	background-color: #FF0000;
+	color: #FFFFFF;
 }
 
-.chooseViewCss{
-	width: 100%;
-	text-align: center;
-	padding-bottom: 5%;
-	padding-top: 5%;
-}
-
-.chooseViewCss_option{
-	display: inline-block;
-	margin: 10% 5%;
-	width: 40%;
-}
-
-.customViewCss{
-	vertical-align:middle;
-	background: white;
-	height: 200rpx;
-	padding-top: 5%;
-	margin-bottom: 10%;
-}
-
-.subOrCancelCss{
-	background: white;
-	width: 100%;
-}
-
-.subOrCancel_subCss{
+.modifyDayViewCss_dateCss{
 	display: inline-block;
 	text-align: center;
-	width: 49%;
-	margin-top: 5%;
+	margin:40rpx 20rpx 80rpx 20rpx;
 }
 
-.subOrCancel_cancelCss{
-	display: inline-block;
-	text-align: center;
-	width: 50%;
-	margin-top: 5%;
-	border-right: 1rpx solid black;
+.modifyDayViewCss_dateCss p{
+	
 }
 
-.customViewCss input{
-	width: 80%;
-	text-align: center;
-	margin-left: 10%;
-	border: 1rpx solid black;		//边框
-	-webkit-border-radius: 100px;	//圆角
-	-moz-border-radius: 100px;		
-	border-radius: 100px;
-	height:60rpx;
+.modifyDayViewCss_dateCss picker-view{	
+	position: relative;
+	z-index: 3;
+	width: 300rpx;
+	height: 400rpx;
+	margin-top: 30rpx;
 }
+
+.modifyDayViewCss_dateCss picker-view-column{
+	background-color: #C8C7CC
+}
+
 </style>

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "选择行程时间",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "uni-calendar": "/components/uni-calendar/uni-calendar",
+    "h-form-alert": "/components/h-form-alert/h-form-alert"
+  }
+}

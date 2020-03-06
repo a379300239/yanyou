@@ -8,6 +8,9 @@
 		},
 		onHide: function() {
 			console.log('App Hide');
+		},
+		globalData:{
+			baseUrl:'http://rap2.taobao.org:38080/app/mock/246171'
 		}
 	}
 </script>

@@ -1,6 +1,6 @@
 <template style="position: absolute;z-index: -4;">
 	<!-- 已登录 -->
-	<view v-if="isLogin" style="width: 100%;position: absolute;z-index: 1;">
+	<view style="width: 100%;position: absolute;z-index: 1;">
 		
 		<!-- 上方功能区 -->
 		<view style="position: relative; width: 750rpx; height:600rpx;z-index: -2;">
@@ -17,14 +17,21 @@
 			</view>
 			
 			<!-- 图标显示区 -->
-			<view style="position: absolute;z-index: 1;width: 750rpx;text-align: center;top:94rpx">
+			<view style="position: absolute;z-index: 1;width: 750rpx;text-align: center;top:94rpx" @click="login">
 				<!-- 头像 -->
-				<image :src="userInformation.userImg" style="width: 150rpx;height: 150rpx;border-radius:50%;"></image>
+				<image v-if="isLogin" :src="userInformation.userImg" style="width: 150rpx;height: 150rpx;border-radius:50%;"></image>
+				<image v-if="!isLogin" src="../../static/myInformation/default.jpg" style="width: 150rpx;height: 150rpx;border-radius:50%;"></image>
+				
 				
 				<!-- 用户名 -->
-				<view style="width: 750rpx; display: inline-block;">
+				<view v-if="isLogin" style="width: 750rpx; display: inline-block;">
 					<p style="font-size: 54rpx;display: inline-block; margin-right: 20rpx;">{{userInformation.userName}}</p>
 					<image src="../../static/myInformation/editButton.png" style="width: 34rpx;height: 34rpx;display: inline-block;"></image>
+				</view>
+				
+				<!-- 未登陆时显示 -->
+				<view v-if="!isLogin" style="width: 750rpx; display: inline-block;">
+					<p style="font-size: 40rpx;display: inline-block; margin-right: 20rpx;">点击登陆，体验更多</p>
 				</view>
 				
 				<!-- 三个按钮：我的收藏、我的行程、我的定制 -->
@@ -66,22 +73,19 @@
 		
 		<!-- 下方功能区 -->
 		<view style="margin-top: 12rpx;">
-			<view class="functionList" v-for="a_list in chooseData" >
-				<image :src="a_list.icon_url" class="functionList_icon"></image>
-				<p>{{a_list.name}}</p>
+			<view class=" functionList" v-for="a_list in chooseData" >
+				<view class="functionList_left">
+					<image :src="a_list.icon_url" class="functionList_icon"></image>
+					<p>{{a_list.name}}</p>
+				</view>
 				<image src="../../static/myInformation/fanhui.png" class="functionList_fanhui"></image>
 			</view>
 		</view>
 		
-		<button @click="logout" style="margin-top: 30rpx;background-color: red;color: #FFFFFF;width: 400rpx;">退出登陆</button>
+		<button v-if="isLogin" @click="logout" style="margin-top: 30rpx;background-color: red;color: #FFFFFF;width: 400rpx;">退出登陆</button>
 		
 	</view>
-	
-	<!-- 未登录 -->
-	<view v-else>
-		<p>未登录</p>
-		<button @click="login">登陆</button>
-	</view>
+
 </template>
 
 <script>
@@ -133,9 +137,11 @@
 				this.isLogin=false;
 			},
 			login:function(){
-				uni.navigateTo({
-					url:"../login/login"
-				});
+				if(!this.isLogin){
+					uni.navigateTo({
+						url:"../login/login"
+					});
+				}
 			},
 			navigatorTo:function(type,aim){
 				if(type=='another'){
@@ -193,16 +199,21 @@
 
 .functionList{
 	width: 750rpx;
+	height: 100rpx;
 	/* height: 100rpx; */
-	display: inline-block;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	border-bottom: #C8C7CC 1rpx solid;	
-	padding-bottom: 25rpx;
-	padding-top:35rpx;
+}
+
+.functionList_left{
+	display: flex;
+	align-items: center;
 }
 
 .functionList_icon{
-	display: inline-block;
-	margin:5rpx 24rpx 0rpx 24rpx;
+	margin:0rpx 24rpx 0rpx 24rpx;
 	width: 50rpx;
 	height: 50rpx;
 }
@@ -210,17 +221,14 @@
 .functionList p{
 	display: inline-block;
 	padding:0rpx 24rpx 0rpx 24rpx;
-	vertical-align: top;
 }
 
 .functionList_fanhui{
 	display: inline-block;
-	margin:13rpx 24rpx 0rpx 24rpx;
+	margin:0rpx 24rpx 0rpx 24rpx;
 	width: 18rpx;
 	height: 34rpx;
 	vertical-align: top;
-	position: absolute;
-	right: 9rpx;
 }
 
 </style>

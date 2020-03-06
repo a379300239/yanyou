@@ -1,6 +1,5 @@
 <template>
-	<view style="width: 100%; background: #FAFAFA;">
-		
+	<view style="width: 100%; background: #FAFAFA;" v-if="isLoading">
 		<!-- 导航栏 -->	
 		<view class="navigator">
 			<view style="width: 20%; display:inline-block;height: 100rpx;">
@@ -19,7 +18,7 @@
 		<!-- banner -->
 		<view style="background: #EBEBEB;" >
 			
-			<uni-swiper-dot :info="info" :current="current" :mode="mode" :dots-styles="dotsStyles" field="content">
+			<uni-swiper-dot :info="info" :current="current" :mode="mode" :dots-styles="dotsStyles">
 				<swiper class="swiper-box" @change="change">
 					<swiper-item v-for="(item, index) in info" :key="index">
 						<view :class="item.colorClass" class="swiper-item">
@@ -68,15 +67,26 @@
 		
 		
 	</view>
+	
+	<view v-else>
+		<yanyouLoading></yanyouLoading>
+	</view>
 </template>
 
 <script>
 	import uniSwiperDot from '@/components/uni-swiper-dot/uni-swiper-dot.vue'
+	import yanyouLoading from '@/components/yanyou-loading/yanyou-loading.vue'
+	
 	export default{
 		data(){
 			return {
+				isLoading:false,		//是否正在加载数据
 				// banner相关
-				info: [],
+				info: [
+					{
+						content:{}
+					}
+				],
 				current: 0,
 				mode: 'indexes',
 				dotsStyles: {
@@ -115,96 +125,10 @@
 				},
 				/************************************************************************/
 				//页面数据
-				chengHuaInfo:[{
-						colorClass: 'uni-bg-red',
-						url: '../../static/index/banner_1.jpg',
-						content: {
-							name:'成华区推荐路线1',
-							keyvalue:'雪白、好看',
-						introduce:'雪山是台湾的次高山，海拔高度3886米。雪山位于苗栗县泰安乡和台中县和平乡的交界，标高3,886公尺，为雪山山系的最高峰，在百岳中仅次于玉山。雪山是雪山山脉的中心点，由此向外呈放射状延伸，支脉绵亘北台湾。全山是由赤褐色页岩、砂岩及板岩所构成。雪山地区有多处的「冰斗」地形，是台湾冰河遗迹最多的地方。'
-						}
-				}, {
-						colorClass: 'uni-bg-red',
-						url: '../../static/index/banner_2.jpg',
-						content: {
-							name:'成华区推荐路线2',
-							keyvalue:'草地、干净',
-							introduce:'草地是一种复合植物群落，由草、开花植物和喜光植物组成。开花植物和喜光植物所占的比例高低有所变化。草坪是长期维持低矮状态，而种类丰富的草地一年只修剪一次或两次，物种比较稀少的草地一年可以修剪多次，有时可以达到六次。除了当地因子(如土壤和气候)以外恢复性修剪也有助于调整物种组成。草地有其自有的生长、开花、结果和种子成熟的规律：一般来说，草地需要的维护管理很少．但是也不耐践踏。'
-						}
-				}, {
-						colorClass: 'uni-bg-red',
-						url: '../../static/index/banner_3.jpg',
-						content: {
-							name:'成华区推荐路线3',
-							keyvalue:'神秘、古老',
-							introduce:'金字塔在埃及和美洲等地均有分布，古埃及的上埃及、中埃及和下埃及，今苏丹和埃及境内。现在的尼罗河下游，散布着约80座金字塔遗迹。 大小不一，其中最高大的是胡夫金字塔，高146.5米，底长230米，共用230万块平均每块2.5吨的石块砌成，占地52000平方公尺。石块之间没有任何黏着物，靠石块的相互叠压和咬合垒成。国王哈佛拉的金字塔前，还矗立着一座象征国王权力与尊严的狮身人面像。埃及金字塔是古埃及的帝王（法老）陵墓。世界七大奇迹之一。数量众多，分布广泛。开罗西南尼罗河西古城孟菲斯一带的金字塔是占有集中的一部分。'
-						}
-				}],
-				chengHuaRoutes:[
-					{
-						name:'东郊记忆',
-						feature:"中国特色商业步行街1",
-						price:"45",
-						url:'../../static/index/dongjiaojiyi.jpg'
-					},
-					{
-						name:'成都理工大学',
-						feature:"中国特色商业步行街2",
-						price:"45",
-						url:'../../static/index/CDUT.jpg'
-					},
-					{
-						name:'熊猫塔',
-						feature:"中国特色商业步行街3",
-						price:"45",
-						url:'../../static/index/pandaTower.jpg'
-					}					
-				],
-				jinNiuInfo:[{
-						colorClass: 'uni-bg-red',
-						url: '../../static/index/banner_1.jpg',
-						content: {
-							name:'金牛区推荐路线一',
-							keyvalue:'雪白、好看',
-						introduce:'雪山是台湾的次高山，海拔高度3886米。雪山位于苗栗县泰安乡和台中县和平乡的交界，标高3,886公尺，为雪山山系的最高峰，在百岳中仅次于玉山。雪山是雪山山脉的中心点，由此向外呈放射状延伸，支脉绵亘北台湾。全山是由赤褐色页岩、砂岩及板岩所构成。雪山地区有多处的「冰斗」地形，是台湾冰河遗迹最多的地方。'
-						}
-				}, {
-						colorClass: 'uni-bg-red',
-						url: '../../static/index/banner_2.jpg',
-						content: {
-							name:'金牛区推荐路线二',
-							keyvalue:'草地、干净',
-							introduce:'草地是一种复合植物群落，由草、开花植物和喜光植物组成。开花植物和喜光植物所占的比例高低有所变化。草坪是长期维持低矮状态，而种类丰富的草地一年只修剪一次或两次，物种比较稀少的草地一年可以修剪多次，有时可以达到六次。除了当地因子(如土壤和气候)以外恢复性修剪也有助于调整物种组成。草地有其自有的生长、开花、结果和种子成熟的规律：一般来说，草地需要的维护管理很少．但是也不耐践踏。'
-						}
-				}, {
-						colorClass: 'uni-bg-red',
-						url: '../../static/index/banner_3.jpg',
-						content: {
-							name:'金牛区推荐路线三',
-							keyvalue:'神秘、古老',
-							introduce:'金字塔在埃及和美洲等地均有分布，古埃及的上埃及、中埃及和下埃及，今苏丹和埃及境内。现在的尼罗河下游，散布着约80座金字塔遗迹。 大小不一，其中最高大的是胡夫金字塔，高146.5米，底长230米，共用230万块平均每块2.5吨的石块砌成，占地52000平方公尺。石块之间没有任何黏着物，靠石块的相互叠压和咬合垒成。国王哈佛拉的金字塔前，还矗立着一座象征国王权力与尊严的狮身人面像。埃及金字塔是古埃及的帝王（法老）陵墓。世界七大奇迹之一。数量众多，分布广泛。开罗西南尼罗河西古城孟菲斯一带的金字塔是占有集中的一部分。'
-						}
-				}],
-				jinNiuRoutes:[
-					{
-						name:'成都植物园',
-						feature:"中国特色商业步行街1",
-						price:"45",
-						url:'../../static/index/chengDuPlant.jpg'
-					},
-					{
-						name:'欢乐谷',
-						feature:"中国特色商业步行街2",
-						price:"45",
-						url:'../../static/index/huanleGu.jpg'
-					},
-					{
-						name:'西华大学',
-						feature:"中国特色商业步行街3",
-						price:"45",
-						url:'../../static/index/xiHuaUniversity.jpg'
-					}					
-				],
+				chengHuaInfo:[],
+				chengHuaRoutes:[],
+				jinNiuInfo:[],
+				jinNiuRoutes:[],
 			}
 		},
 		methods:{
@@ -216,6 +140,10 @@
 				this.currentSitesList.push(this.sites.sites[0][0]);
 				//加载页面数据
 				this.load_spotData('成华区');
+
+			},
+			onShow:function(){
+				this.current=0;
 			},
 			//图片框更改
 			change:function(e) {
@@ -243,30 +171,32 @@
 			},
 			//加载地区数据
 			load_spotData:function(spot){
-				switch (spot){
-					case '成华区':{
-						this.info=this.chengHuaInfo;
-						this.routes=this.chengHuaRoutes;
-					}break;
-					case '金牛区':{
-						this.info=this.jinNiuInfo;
-						this.routes=this.jinNiuRoutes;
-					}break;
-					default:{
-						this.info=this.chengHuaInfo;
-						this.routes=this.chengHuaRoutes;
-					}break;
-				}
+				//获得推荐路线数据
+				uni.request({
+					url:getApp().globalData.baseUrl+"/spotRoute/"+spot,
+					success:(data)=>{
+						this.info=data.data._root_;
+						this.isLoading=true;
+					}
+				});
+				// 获得推荐景区数据
+				uni.request({
+					url:getApp().globalData.baseUrl+"/spotSite/"+spot,
+					success:(data)=>{
+						this.routes=data.data._root_;
+					}
+				});
 			},
 			navigator_siteIntroduction:function(site){
 				uni.navigateTo({
-					url:"../siteIntroduction/siteIntroduction?siteName="+site+"&isEdit=true",
+					url:"../siteIntroduction/siteIntroduction?siteName="+site+"&isEdit=false",
 					animationType:"pop-in"
 				});
 			}
 		},
 		components:{
 			uniSwiperDot,		//banner
+			yanyouLoading
 		}
 	}
 </script>

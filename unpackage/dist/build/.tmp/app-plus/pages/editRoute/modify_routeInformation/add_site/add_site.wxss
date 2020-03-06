@@ -1,0 +1,120 @@
+
+.typeChooseCss{
+	width: 750rpx;
+	position: absolute;
+	top: 240rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-justify-content: space-around;
+	        justify-content: space-around;
+	z-index: 3;
+}
+.typeChooseCss view{
+	font-size: 32rpx;
+	width: 120rpx;
+	height: 50rpx;
+	background-color: #FFFFFF;
+	border-radius: 15rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+}
+
+/* 按钮被选中 */
+.isChoosed{
+	color: #0ba6c2;
+}
+.siteCss{
+}
+
+/* 一个景点 */
+.aSiteCss{
+	width: 750rpx;
+}
+.aSiteCss_left{
+	display: inline-block;
+	width:300rpx;
+	text-align: center;
+}
+.aSiteCss_image{
+	overflow: hidden;
+	display: inline-block;
+	text-align: center;
+	width: 260rpx;
+	height: 260rpx;
+}
+.aSiteCss_image ._img{
+	width:500rpx;
+	position: relative;
+	right: 130rpx;
+}
+.aSiteCss_text{
+	display: inline-block;
+	width: 450rpx;
+}
+.aSiteCss_text_siteName{
+	font-size: 36rpx;
+	color: #333333;
+	font-weight: bolder;
+}
+.fontFormat{
+	margin-top: 9rpx;
+	font-size: 28rpx;
+}
+.aSiteCss_text_siteGrade{
+	color: #11b4d1;
+}
+.aSiteCss_text_siteOpenTime{
+	color: #999999;
+}
+.aSiteCss_text_introduction{
+	color: #999999;
+	overflow: hidden;
+	height: 115rpx;
+	/* 省略号 */
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+}
+.trafficCss{
+	margin-top: 30rpx;
+}
+button{
+	width: 500rpx;
+	background-color: #0077EE;
+	color: #FFFFFF;
+}
+.VehcileCss{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: left;
+	-webkit-justify-content: left;
+	        justify-content: left;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	padding: 0 0rpx 0 40rpx;
+	font-size: 32rpx;
+}
+.VehcileCss view{
+	position: relative;
+	right: 20rpx;
+	margin: 30rpx;
+}
+.VehcileCss_choose{
+	color: #000000;
+}
+.VehcileCss_unChoose{
+	color: #A1A1A1;
+}
+

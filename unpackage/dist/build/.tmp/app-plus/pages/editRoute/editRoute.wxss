@@ -1,74 +1,148 @@
 
-.DayCss{
+.routeCss{
+	position: relative;
 	display: inline-block;
-	width: 40%;
-	text-align: center;
+	border-left: 1rpx solid #C8C7CC;
+	margin-left: 48rpx;
+	padding-top: 44rpx;
+	padding-left: 44rpx;
+}
+.routeCss_noRouteCss{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	width: 620rpx;
+	background-color: #EBEBEB;
+	margin: 65rpx 0 65rpx 0;
+	padding: 44rpx 0 44rpx 0;
+	border-radius: 20rpx;
+}
+.routeCss_noRouteCss ._p{
+	color: #0792ab;
+}
+.routeCss_content{
+	width: 620rpx;
+	position: relative;
+	border-radius: 30rpx;
+	background-color: #FFFFFF;
+	display: inline-block;
+}
+.routeCss_text{
 	vertical-align: top;
-}
-.dayChooseCss{
-	padding-top: 2%;
-	padding-bottom: 2%;
-	margin-left: 43%;
-}
-.dateNumCss{
-	width: 20%;
-	text-align: center;
 	display: inline-block;
-	padding-top: 3%;
+	padding: 26rpx 40rpx 26rpx 40rpx;
 }
-.oneDayCss{
-	margin-top: 2%;
-	padding-bottom: 2%;
-}
-.oneSiteCss{
-}
-.oneDayCss ._img{
-	text-align: right;
+.routeCss_img{
+	vertical-align: bottom;
 	display: inline-block;
-	width: 45%;
-	height: 45%;
+	margin-left: 20rpx;
 }
-.chooseViewCss{
-	width: 100%;
+.siteNameCss{
+	font-size: 35rpx;
+}
+.sitePlayTimeCss{
+	margin-top: 46rpx;
+	color: #666666;
+	font-size: 32rpx;
+}
+.siteGradeCss{
+	margin-top: 20rpx;
+	color: #666666;
+	font-size: 32rpx;
+}
+.siteImgCss{
+	position: absolute;
+	right: 30rpx;
+	bottom: 30rpx;
+	width: 225rpx; 
+	height: 130rpx; 
+	overflow: hidden;
+	border-radius: 20rpx;
+}
+.siteImgCss image{
+	width: 225rpx;
+	height: 130rpx;
+}
+.trafficCss{
 	text-align: center;
-	padding-bottom: 5%;
-	padding-top: 5%;
+	padding: 40rpx 0 40rpx 0;
 }
-.chooseViewCss_option{
+.customCss{
+	padding: 20rpx 0 20rpx 20rpx;
+}
+.customCss_title{
+}
+.customCss_content{
+	margin-top: 20rpx;
+	color: #666666;
+	font-size: 32rpx;
+}
+.myPopupCss{
+	width: 750rpx;
+	height: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	position: fixed; 
+	z-index: 3;
+	top:0rpx;
+	padding: 25rpx;
+}
+.black_card{
+	width: 750rpx;
+	height: 100%;
+	position: absolute;
+	left: 0rpx;
+	z-index: 3;
+	background-color: #000000;
+	opacity: 0.6;
+}
+.modifyDayViewCss{
+	position: relative;
+	z-index: 3;
+	text-align: center;
+	background-color: #F5F5F5;
+	width: 700rpx;
+	border-radius: 20rpx;
+	padding:20rpx 0 20rpx 0;
+}
+.modifyDayViewCss_confirm{
 	display: inline-block;
-	margin: 10% 5%;
-	width: 40%;
+	width: 300rpx;
+	background-color: #007AFF;
+	color: #FFFFFF;
 }
-.customViewCss{
-	vertical-align:middle;
-	background: white;
-	height: 200rpx;
-	padding-top: 5%;
-	margin-bottom: 10%;
+.modifyDayViewCss_cancel{
+	display: inline-block;
+	width: 300rpx;
+	background-color: #FF0000;
+	color: #FFFFFF;
 }
-.subOrCancelCss{
-	background: white;
-	width: 100%;
-}
-.subOrCancel_subCss{
+.modifyDayViewCss_dateCss{
 	display: inline-block;
 	text-align: center;
-	width: 49%;
-	margin-top: 5%;
+	margin:40rpx 20rpx 80rpx 20rpx;
 }
-.subOrCancel_cancelCss{
-	display: inline-block;
-	text-align: center;
-	width: 50%;
-	margin-top: 5%;
-	border-right: 1rpx solid black;
+.modifyDayViewCss_dateCss ._p{
 }
-.customViewCss input{
-	width: 80%;
-	text-align: center;
-	margin-left: 10%;
-	border: 1rpx solid black;		/*边框 */	/*圆角 */		
-	border-radius: 100px;
-	height:60rpx;
+.modifyDayViewCss_dateCss picker-view{	
+	position: relative;
+	z-index: 3;
+	width: 300rpx;
+	height: 400rpx;
+	margin-top: 30rpx;
 }
+.modifyDayViewCss_dateCss picker-view-column{
+	background-color: #C8C7CC
+}
+
 

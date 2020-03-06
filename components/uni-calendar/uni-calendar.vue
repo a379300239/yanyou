@@ -248,7 +248,6 @@
 	.uni-calendar {
 		/* #ifndef APP-NVUE */
 		display: flex;
-		margin-top: 5%;
 		/* #endif */
 		flex-direction: column;
 	}

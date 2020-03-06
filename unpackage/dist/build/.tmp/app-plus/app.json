@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/initialPage/initialPage",
     "pages/index/index",
     "pages/login/login",
     "pages/register/register",
@@ -7,7 +8,13 @@
     "pages/diyRoute/diyRoute",
     "pages/myInformation/myInformation",
     "pages/siteIntroduction/siteIntroduction",
-    "pages/editRoute/editRoute"
+    "pages/editRoute/editRoute",
+    "pages/editRoute/save",
+    "pages/editRoute/choose_time/choose_time",
+    "pages/editRoute/choose_place/choose_place",
+    "pages/editRoute/modify_routeInformation/modify_routeInformation",
+    "pages/editRoute/modifySite/modifySite",
+    "pages/editRoute/modify_routeInformation/add_site/add_site"
   ],
   "window": {},
   "tabBar": {
@@ -48,6 +55,6 @@
     "autoclose": false
   },
   "appname": "YanYou",
-  "compilerVersion": "2.5.1",
+  "compilerVersion": "2.6.1",
   "usingComponents": {}
 }

@@ -5,15 +5,15 @@
 		<!-- 无路线 -->
 		<view v-if="!isHaveRoute" style="text-align: center;">
 			<p style="width: 750rpx; text-align: center;font-size: 42rpx;margin-top: 200rpx;">“来一场说走就走的旅行”</p>
-			<navigator url="../editRoute/editRoute" style="width: 240rpx; height: 10rpx; display: inline-block;margin-top: 30rpx;">
+			<navigator url="../editRoute/choose_time/choose_time" style="width: 240rpx; height: 10rpx; display: inline-block;margin-top: 30rpx;">
 				<image src="../../static/diyRoute/add_route.png" style="width: 236rpx;height: 72rpx;vertical-align: bottom;"></image>
-			</navigator>		
+			</navigator>
 		</view>
 		
 		<!-- 有路线 -->
 		<view v-else style="background-color: #F2F2F2;">
 			
-			<navigator url="../editRoute/editRoute" style="display: inline-block;">
+			<navigator url="../editRoute/choose_time/choose_time" style="display: inline-block;">
 				<view class="addCardCss">
 					<!-- 图片 -->
 					<image src="../../static/diyRoute/img1.jpg" class="addCardCss_bgimg"></image>
@@ -23,15 +23,15 @@
 				</view>
 			</navigator>
 			
-			<view class="addCardCss" v-for="(route,routeName) in userRoute" :key="route.num">
+			<view class="addCardCss" v-for="(route,routeId) in userRoute" :key="route.num">
 					<!-- 图片 -->
 					<!-- 菜单按钮 -->
-					<image :id="cardId_qianZhui+route.num" src="../../static/diyRoute/list.png" @click="open_doList($event,routeName)" class="addButtonCss_listChoose" />
+					<image :id="cardId_qianZhui+route.num" src="../../static/diyRoute/list.png" @click="open_doList($event,routeId)" class="addButtonCss_listChoose" />
 					
 					<!-- 背景图片 -->
-					<image src="../../static/diyRoute/img2.jpg" class="addCardCss_bgimg"></image>
+					<image :src="route.routeImg" class="addCardCss_bgimg"></image>
 					
-					<navigator :url='diyRouteUrl+routeName' >
+					<navigator :url='diyRouteUrl+routeId' >
 						<!-- 阴影遮罩 -->
 						<image src="../../static/diyRoute/black.png" class="addButtonCss_black"></image>
 					
@@ -39,7 +39,7 @@
 						<p class="addCardCss_statue" v-if="route.routeStatu=='已结束'" style="background-color: #11B4D1;">{{route.routeStatu}}</p>
 						<p class="addCardCss_statue" v-if="route.routeStatu=='进行中'" style="background-color: #11d174;">{{route.routeStatu}}</p>
 						<p class="addCardCss_statue" v-if="route.routeStatu=='待进行'" style="background-color: #d17411;">{{route.routeStatu}}</p>
-						<p class="addCardCss_siteName">{{routeName}}</p>
+						<p class="addCardCss_siteName">{{route.routeName}}</p>
 						<p class="addCardCss_siteTime">{{route.routeStartTime.replace(/-/g,'.')}}-{{route.routeEndTime.replace('-','.')}}</p>
 					</navigator>
 			</view>
@@ -73,7 +73,8 @@
 				isHaveRoute:"",
 				userInformation:"",
 				userRoute:"",
-				diyRouteUrl:"../editRoute/editRoute?routeName=",
+				// diyRouteUrl:"../editRoute/save?routeName=",
+				diyRouteUrl:"../editRoute/editRoute?routeId=",
 				cardId_qianZhui:"cardId_",
 				uid:0,
 				showDoList:false,
@@ -87,7 +88,7 @@
 				],
 				x:0,
 				y:0,
-				currentRouteName:"",
+				currentRouteId:"",
 				scrollTop:0,
 				
 				
@@ -95,6 +96,7 @@
 		},
 		methods: {
 			onShow:function(){
+				
 				//获得当前用户信息
 				this.userInformation=uni.getStorageSync("currentUser");
 				
@@ -108,10 +110,10 @@
 						this.userRoute=uni.getStorageSync(this.userInformation.userName+"_route");
 						//添加index、当前日期状态
 						var index=0;
-						for(var routeName in this.userRoute){
-							this.userRoute[routeName]['num']=index++;
-							var currentTimeStatu=this.get_currentTimeStatu(routeName);
-							this.userRoute[routeName]['routeStatu']=currentTimeStatu;
+						for(var routeId in this.userRoute){
+							this.userRoute[routeId]['num']=index++;
+							var currentTimeStatu=this.get_currentTimeStatu(routeId);
+							this.userRoute[routeId]['routeStatu']=currentTimeStatu;
 						}
 					}
 					else{
@@ -141,10 +143,10 @@
 			},
 			
 			//获得当前时间状态，待进行，进行中，已进行
-			get_currentTimeStatu:function(routeName){
+			get_currentTimeStatu:function(routeId){
 				// console.log(this.userRoute[routeName])
-				var startTime=new Date(this.userRoute[routeName].routeStartTime).getTime();			//都转换为格林威治时间秒数
-				var endTime=new Date(this.userRoute[routeName].routeEndTime).getTime();
+				var startTime=new Date(this.userRoute[routeId].routeStartTime).getTime();			//都转换为格林威治时间秒数
+				var endTime=new Date(this.userRoute[routeId].routeEndTime).getTime();
 				var nowTime=new Date();
 				var nowMonth=(nowTime.getMonth()+1)>=10?(nowTime.getMonth()+1):('0'+(nowTime.getMonth()+1));
 				var nowDay=(nowTime.getDate()+1)>=10?(nowTime.getDate()):('0'+nowTime.getDate());
@@ -163,20 +165,20 @@
 				}
 			},
 			
-			open_doList:function(e,routeName){
+			open_doList:function(e,routeId){
 				
 				//记录当前点击路线名称
-				this.currentRouteName=routeName;
+				this.currentRouteId=routeId;
 				
-				//记录当前路线Id
-				var routeId=this.userRoute[routeName]['num'];
+				//记录当前路线序号
+				var routeNumber=this.userRoute[routeId]['num'];
 				
 				//打开选择菜单
 				this.showDoList=true;
 				
 				//选择菜单打开位置控制
 				let dom = uni.createSelectorQuery().in(this);
-				var selectStringCode='#'+this.cardId_qianZhui+routeId;
+				var selectStringCode='#'+this.cardId_qianZhui+routeNumber;
 				dom.select(selectStringCode).boundingClientRect(data =>{
 					this.x=(data['right']-data['left'])/2+data['left'];
 					this.y=(data['bottom']-data['top'])/2+data['top']+this.scrollTop/10+2;
@@ -184,9 +186,9 @@
 			},
 			clickList:function(e){
 				switch (e.title){
-					case "分享路线":this.share_route(this.currentRouteName);
+					case "分享路线":this.share_route(this.currentRouteId);
 						break;
-					case "删除路线":this.delete_route(this.currentRouteName);
+					case "删除路线":this.delete_route(this.currentRouteId);
 						break;
 					default:
 						break;

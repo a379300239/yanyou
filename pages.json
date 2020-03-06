@@ -1,6 +1,11 @@
 {
     "pages": [ //pages数组中第一项表示应用启动页,
 		{
+	    "path" : "pages/initialPage/initialPage",
+	    "style" : {
+			"navigationStyle":"custom"
+		}
+		},{
 			"path": "pages/index/index",
 			"style": {
 				 "navigationBarTitleText":"首页",
@@ -57,7 +62,52 @@
             "path" : "pages/editRoute/editRoute",
             "style" : {
 				"navigationBarTitleText":"自选路线",
-				"navigationBarTextStyle": "black",
+				"navigationBarTextStyle": "white",
+				"navigationStyle":"custom"
+			}
+        }
+		,{
+		    "path" : "pages/editRoute/save",
+		    "style" : {
+				"navigationBarTitleText":"自选路线",
+				"navigationBarTextStyle": "white",
+				"navigationStyle":"custom"
+			}
+		}
+        ,{
+            "path" : "pages/editRoute/choose_time/choose_time",
+            "style" : {
+				"navigationBarTitleText":"选择行程时间",
+				"navigationBarTextStyle": "black"
+			}
+        }
+        ,{
+            "path" : "pages/editRoute/choose_place/choose_place",
+            "style" : {
+				"navigationBarTitleText":"选择目的地",
+				"navigationBarTextStyle": "black"
+			}
+        }
+        ,{
+            "path" : "pages/editRoute/modify_routeInformation/modify_routeInformation",
+            "style" : {
+				"navigationBarTitleText":"修改行程信息",
+				"navigationBarTextStyle": "black"
+			}
+        }
+        ,{
+            "path" : "pages/editRoute/modifySite/modifySite",
+            "style" : {
+				"navigationBarTitleText":"调整一天",
+				"navigationBarTextStyle": "white",
+				"navigationStyle":"custom"
+			}
+        }
+        ,{
+            "path" : "pages/editRoute/modify_routeInformation/add_site/add_site",
+            "style" : {
+				"navigationBarTitleText":"增加一天",
+				"navigationBarTextStyle": "white",
 				"navigationStyle":"custom"
 			}
         }

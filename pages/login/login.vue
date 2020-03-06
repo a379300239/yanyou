@@ -55,8 +55,8 @@
 			},
 			submit_form:function(e){
 				uni.request({
-					url: 'https://getman.cn/mock/success', 
-					// url:'https://getman.cn/mock/false1',
+					url: getApp().globalData.baseUrl+"/login/success", 
+					// url: getApp().globalData.baseUrl+"/login/false", 
 					
 					success: (res) => {
 						uni.hideLoading();

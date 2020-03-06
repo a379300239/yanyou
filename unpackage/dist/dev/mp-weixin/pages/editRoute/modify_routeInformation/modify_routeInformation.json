@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "修改行程信息",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "q-s-input": "/components/QS-inputs-split/elements/QS-input/index",
+    "q-s-picker-date": "/components/QS-inputs-split/elements/QS-picker-date/index",
+    "q-s-infinite-pics": "/components/QS-inputs-split/elements/QS-infinitePics/index"
+  }
+}

@@ -24,31 +24,42 @@
 }
 .functionList{
 	width: 750rpx;
+	height: 100rpx;
 	/* height: 100rpx; */
-	display: inline-block;
-	border-bottom: #C8C7CC 1rpx solid;	
-	padding-bottom: 25rpx;
-	padding-top:35rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	border-bottom: #C8C7CC 1rpx solid;
+}
+.functionList_left{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
 }
 .functionList_icon{
-	display: inline-block;
-	margin:5rpx 24rpx 0rpx 24rpx;
+	margin:0rpx 24rpx 0rpx 24rpx;
 	width: 50rpx;
 	height: 50rpx;
 }
 .functionList ._p{
 	display: inline-block;
 	padding:0rpx 24rpx 0rpx 24rpx;
-	vertical-align: top;
 }
 .functionList_fanhui{
 	display: inline-block;
-	margin:13rpx 24rpx 0rpx 24rpx;
+	margin:0rpx 24rpx 0rpx 24rpx;
 	width: 18rpx;
 	height: 34rpx;
 	vertical-align: top;
-	position: absolute;
-	right: 9rpx;
 }
 
 

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "调整一天",
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-fab": "/components/uni-fab/uni-fab",
+    "drag-sort": "/components/drag-sort/index"
+  }
+}

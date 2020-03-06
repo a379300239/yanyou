@@ -1,11 +1,18 @@
 {
   "pages": [
+    "pages/initialPage/initialPage",
     "pages/index/index",
     "pages/login/login",
     "pages/register/register",
     "pages/customizingRoute/customizingRoute",
     "pages/diyRoute/diyRoute",
-    "pages/myInformation/myInformation"
+    "pages/myInformation/myInformation",
+    "pages/siteIntroduction/siteIntroduction",
+    "pages/editRoute/editRoute",
+    "pages/editRoute/save",
+    "pages/editRoute/choose_time/choose_time",
+    "pages/editRoute/choose_place/choose_place",
+    "pages/editRoute/modify_routeInformation/modify_routeInformation"
   ],
   "subPackages": [],
   "window": {},

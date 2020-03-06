@@ -78,6 +78,9 @@
           }
         }
       },
+      "splashscreen": {
+        "android": {}
+      },
       "google": {
         "permissions": [
           "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
@@ -106,6 +109,7 @@
       },
       "apple": {},
       "plugins": {
+        "ad": null,
         "audio": {
           "mp3": {
             "description": "Android平台录音支持MP3格式文件"
@@ -121,7 +125,7 @@
       }
     },
     "uni-app": {
-      "compilerVersion": "2.5.1",
+      "compilerVersion": "2.6.1",
       "control": "v8",
       "nvueCompiler": "uni-app",
       "renderer": "auto",
@@ -160,11 +164,8 @@
         }
       ],
       "borderStyle": "rgba(0,0,0,0.4)",
-      "height": "50px",
-      "child": [
-        "lauchwebview"
-      ],
-      "selected": 0
+      "height": "50px"
     }
-  }
+  },
+  "usingComponents": {}
 }

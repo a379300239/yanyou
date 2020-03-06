@@ -1,0 +1,1 @@
+<view class="loadingCss"><view class="loadingCss_item"><image src="/static/loading/loading.png"></image><view class="loading_loading _p">加载中 请您稍等</view><view class="loading_bottom _p">loading...</view></view></view>

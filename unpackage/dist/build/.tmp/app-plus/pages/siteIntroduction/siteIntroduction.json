@@ -1,4 +1,6 @@
 {
   "navigationStyle": "custom",
-  "usingComponents": {}
+  "usingComponents": {
+    "yanyou-loading": "/components/yanyou-loading/yanyou-loading"
+  }
 }

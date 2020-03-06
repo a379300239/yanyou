@@ -1,23 +1,55 @@
 <template>
   <movable-area class="drag-sort" :style="{height: currentListLength + 'px'}" id="drag">
     <movable-view
-    v-for="(item, index) in currentList"
+    v-for="(site, index) in currentList"
     :key="index"
     :x="0"
-    :y="item.y"
+    :y="site.y"
     direction="vertical"
-    disabled
-    damping="40"
     :animation="false"
+	disabled
     class="drag-sort-item"
-    style="height:55px"
-    :class="{'active': active === index, 'vh-1px-t': item.index > 0}">
-      <view class="item">{{item[props.label]}}</view>
-      <view class="touch-tight">
-        <view class="ico_drag"></view>
-      </view>
+    :class="{'active': active === index, 'vh-1px-t': site.index > 0}">
+	  
+		<image
+			:src="iconUrl+site.siteType+iconUrl_houZhui"/>
+		
+		<view class="item">
+			
+			<view class="routeEditCss_right_site_text">
+				<p class="routeEditCss_right_site_number">No.{{index+1}}</p>
+				<p
+					v-if="site.siteType=='site' || site.siteType=='food' ||site.siteType=='hotel'"
+					class="routeEditCss_right_site_siteName"
+				>{{site.siteName}}</p>
+				
+				<p
+					v-if="site.siteType=='traffic'"
+					class="routeEditCss_right_site_siteName"
+				>{{site.startPlace}}-{{site.endPlace}} {{site.vehicle}}</p>
+				
+				<p
+					v-if="site.siteType=='custom'"
+					class="routeEditCss_right_site_siteName"
+				>{{site.title}}</p>
+					
+			</view>
+			
+			<view class="touch-tight" v-if="!isDeleting">
+			  <view class="ico_drag"></view>
+			</view>
+			
+			<view v-if="isDeleting">
+				<checkbox @click="choose_delete(index)"></checkbox>
+			</view>
+			
+		</view>
+	  
+	  
     </movable-view>
+	
     <movable-view
+	v-if="!isDeleting"
     class="touch"
     :x="2000"
     @touchstart="touchstart"
@@ -36,12 +68,15 @@ export default {
   components: {},
   data () {
     return {
-      height: 55, // 高度
+      height: 100, // 高度
       currentList: [],
       active: -1, // 当前激活的item
       itemIndex: 0, // 当前激活的item的原index
       topY: 0, // 距离顶部的距离
-      deviationY: 0 // 偏移量
+      deviationY: 0 ,// 偏移量
+	  iconUrl:'/static/modifySite/',//图标url
+	  iconUrl_houZhui:'.png',
+	  deleteArry:[]
     }
   },
   computed: {
@@ -65,7 +100,13 @@ export default {
           value: 'value'
         }
       }
-    }
+    },
+	isDeleting:{
+		type:Boolean,
+		default:()=>{
+			return false
+		}
+	}
   },
   watch: {
     list (val) {
@@ -80,6 +121,15 @@ export default {
   updated () {},
   filters: {},
   methods: {
+	//删除相关
+	choose_delete(index){
+		this.$emit('choose_delete',index);
+	},
+	startDeleting:function(e){
+		console.log(e);
+	},
+	
+	
     onUpdateCurrentList () {
       let arr = []
       for (const key in this.list) {
@@ -147,7 +197,7 @@ export default {
             delete data.index
             delete data.y
             delete data.animation
-            return data
+            return this.active
           })(),
           // 插队的位置前面的值
           frontData: (() => {
@@ -159,7 +209,7 @@ export default {
                 delete data.index
                 delete data.y
                 delete data.animation
-                return data
+                return iterator.index
               }
             }
           })()
@@ -183,13 +233,17 @@ export default {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0;
+  /* padding: 0; */
   margin: 0;
   background: #fff;
-  padding: 0 15px;
+  padding: 80rpx 10rpx 80rpx 10rpx;
   box-sizing: border-box;
+  overflow: hidden;
   .item {
-    flex: 1;
+    display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 400rpx;
   }
   .touch-tight {
     width: 24px;
@@ -197,6 +251,14 @@ export default {
     justify-content: center;
   }
 }
+
+.drag-sort-item image{
+	width: 62rpx;
+	height: 62rpx;
+	margin: 0 20px 0 15px;
+	
+}
+
 .touch {
   height: 100%;
   width: 50px;
@@ -212,4 +274,26 @@ export default {
   box-shadow: 0 0 40rpx #DDDDDD;
   z-index: 99;
 }
+
+/* 我加的 */
+.routeEditCss_right_site{
+	display: flex;
+	align-items: center;
+	/* height: 152rpx; */
+	overflow: hidden;
+}
+
+.routeEditCss_right_site_text{
+}
+
+.routeEditCss_right_site_number{
+	font-size: 39rpx;
+	color: #666666;
+}
+
+.routeEditCss_right_site_siteName{
+	font-size: 45rpx;
+	color: #333333;
+}
+
 </style>

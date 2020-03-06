@@ -1,0 +1,172 @@
+
+.routeEditCss{
+	width: 750rpx;
+	height: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	overflow: hidden;
+}
+.routeEditCss_left{
+	width: 202rpx;
+	margin-top: 54rpx;
+	background-color: #F5F5F5;
+}
+.routeEditCss_left_day{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	height: 152rpx;
+	width: 202rpx;
+	border-top: #C8C7CC 1rpx solid;
+}
+.routeEditCss_left_day_choosed{
+	background-color: #FFFFFF;
+}
+.routeEditCss_left_date{
+	color: #666666;
+	font-size: 39rpx;
+}
+.routeEditCss_left_place{
+	margin-top: 11rpx;
+	color: #333333;
+	font: 42rpx;
+}
+.routeEditCss_right{
+	margin-top: 54rpx;
+}
+.routeEditCss_right_list{
+}
+.routeEditCss_right_list_none{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	position: relative;
+	bottom:150rpx
+}
+.routeEditCss_right_site{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	height: 152rpx;
+	overflow: hidden;
+}
+.routeEditCss_right_site_text{
+	border-bottom: 1rpx #C8C7CC solid;
+	padding-bottom: 30rpx;
+	width: 400rpx;
+}
+.routeEditCss_right_site image{
+	width: 62rpx;
+	height: 62rpx;
+	margin: 0 44rpx 0 34rpx;
+}
+.routeEditCss_right_site_number{
+	font-size: 39rpx;
+	color: #666666;
+}
+.routeEditCss_right_site_siteName{
+	font-size: 45rpx;
+	color: #333333;
+}
+.routeEditCss_right_site_line{
+	margin-top: 30rpx;
+	width: 412rpx;
+}
+.myPopupCss{
+	width: 750rpx;
+	height: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	position: fixed; 
+	z-index: 3;
+	top:0rpx;
+	padding: 25rpx;
+	background-color: #F5F5F5;
+}
+.myPopupCss_siteChoose{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+}
+.myPopupCss_siteChoose view{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	padding: 0 64rpx 44rpx 64rpx;
+}
+.myPopupCss_siteChoose image{
+	width: 194rpx;
+	height: 80rpx;
+}
+.myPopupCss_siteChoose ._p{
+	margin-top: 12rpx;
+	color: #333333;
+	font-size: 36rpx;
+}
+.myPopupCss_closeButton{
+	width: 750rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	position: fixed;
+	bottom: 40rpx;
+}
+.myPopupCss_closeButton image{
+	height: 76rpx;
+	width: 76rpx;
+}
+.deleteSiteViewCss_confirm{
+	display: inline-block;
+	width: 200rpx;
+	background-color: #007AFF;
+	color: #FFFFFF;
+}
+.deleteSiteViewCss_cancel{
+	display: inline-block;
+	width: 200rpx;
+	background-color: #FF0000;
+	color: #FFFFFF;
+}
+

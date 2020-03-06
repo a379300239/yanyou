@@ -1,7 +1,7 @@
 {
-  "navigationStyle": "custom",
+  "navigationBarTitleText": "我的行程",
+  "navigationBarTextStyle": "black",
   "usingComponents": {
-    "uni-popup": "/components/uni-popup/uni-popup",
-    "uni-calendar": "/components/uni-calendar/uni-calendar"
+    "chun-lei-popups": "/components/chunLei-popups/chunLei-popups"
   }
 }

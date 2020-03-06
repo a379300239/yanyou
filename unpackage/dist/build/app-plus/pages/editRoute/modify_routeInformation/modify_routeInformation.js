@@ -1,0 +1,1 @@
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/editRoute/modify_routeInformation/modify_routeInformation.wxml') } }));

@@ -1,12 +1,12 @@
-.vh-1px.data-v-ae7d38b6,
-.vh-1px-t.data-v-ae7d38b6,
-.vh-1px-b.data-v-ae7d38b6,
-.vh-1px-tb.data-v-ae7d38b6,
-.vh-1px-l.data-v-ae7d38b6,
-.vh-1px-r.data-v-ae7d38b6 {
+.vh-1px.data-v-51afe5d8,
+.vh-1px-t.data-v-51afe5d8,
+.vh-1px-b.data-v-51afe5d8,
+.vh-1px-tb.data-v-51afe5d8,
+.vh-1px-l.data-v-51afe5d8,
+.vh-1px-r.data-v-51afe5d8 {
   position: relative;
 }
-.vh-1px.data-v-ae7d38b6:before {
+.vh-1px.data-v-51afe5d8:before {
   content: " ";
   position: absolute;
   left: 0;
@@ -20,7 +20,7 @@
   -webkit-transform: scale(0.5);
           transform: scale(0.5);
 }
-.vh-1px-t.data-v-ae7d38b6:before {
+.vh-1px-t.data-v-51afe5d8:before {
   content: " ";
   position: absolute;
   left: 0;
@@ -34,7 +34,7 @@
   -webkit-transform: scaleY(0.5);
           transform: scaleY(0.5);
 }
-.vh-1px-b.data-v-ae7d38b6:after {
+.vh-1px-b.data-v-51afe5d8:after {
   content: " ";
   position: absolute;
   left: 0;
@@ -48,7 +48,7 @@
   -webkit-transform: scaleY(0.5);
           transform: scaleY(0.5);
 }
-.vh-1px-tb.data-v-ae7d38b6:before {
+.vh-1px-tb.data-v-51afe5d8:before {
   content: " ";
   position: absolute;
   left: 0;
@@ -62,7 +62,7 @@
   -webkit-transform: scaleY(0.5);
           transform: scaleY(0.5);
 }
-.vh-1px-tb.data-v-ae7d38b6:after {
+.vh-1px-tb.data-v-51afe5d8:after {
   content: " ";
   position: absolute;
   left: 0;
@@ -76,7 +76,7 @@
   -webkit-transform: scaleY(0.5);
           transform: scaleY(0.5);
 }
-.vh-1px-l.data-v-ae7d38b6:before {
+.vh-1px-l.data-v-51afe5d8:before {
   content: " ";
   position: absolute;
   left: 0;
@@ -90,7 +90,7 @@
   -webkit-transform: scaleX(0.5);
           transform: scaleX(0.5);
 }
-.vh-1px-r.data-v-ae7d38b6:after {
+.vh-1px-r.data-v-51afe5d8:after {
   content: " ";
   position: absolute;
   right: 0;
@@ -104,10 +104,10 @@
   -webkit-transform: scaleX(0.5);
           transform: scaleX(0.5);
 }
-.drag-sort.data-v-ae7d38b6 {
+.drag-sort.data-v-51afe5d8 {
   width: 100%;
 }
-.drag-sort-item.data-v-ae7d38b6 {
+.drag-sort-item.data-v-51afe5d8 {
   position: absolute !important;
   display: -webkit-box;
   display: -webkit-flex;
@@ -116,18 +116,26 @@
   -webkit-align-items: center;
           align-items: center;
   width: 100%;
-  padding: 0;
+  /* padding: 0; */
   margin: 0;
   background: #fff;
-  padding: 0 15px;
+  padding: 80rpx 10rpx 80rpx 10rpx;
   box-sizing: border-box;
+  overflow: hidden;
 }
-.drag-sort-item .item.data-v-ae7d38b6 {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-          flex: 1;
+.drag-sort-item .item.data-v-51afe5d8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  width: 400rpx;
 }
-.drag-sort-item .touch-tight.data-v-ae7d38b6 {
+.drag-sort-item .touch-tight.data-v-51afe5d8 {
   width: 24px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -136,19 +144,43 @@
   -webkit-justify-content: center;
           justify-content: center;
 }
-.touch.data-v-ae7d38b6 {
+.drag-sort-item image.data-v-51afe5d8 {
+  width: 62rpx;
+  height: 62rpx;
+  margin: 0 20px 0 15px;
+}
+.touch.data-v-51afe5d8 {
   height: 100%;
   width: 50px;
 }
-.ico_drag.data-v-ae7d38b6 {
+.ico_drag.data-v-51afe5d8 {
   display: inline-block;
   width: 24px;
   height: 12px;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAYCAYAAAC8/X7cAAAAAXNSR0IArs4c6QAAAEtJREFUWAnt1cEJACAMA0B1/506moIr5FEK51+Jl0d2Vd01+JzB2X90H5jeoPwECBDIBLYlzgDj25Y4JvQAAQIERgtY4u76LHF3Aw8rGQnK3sYAXQAAAABJRU5ErkJggg==) 0 0 no-repeat;
   background-size: 100% auto;
 }
-.active.data-v-ae7d38b6 {
+.active.data-v-51afe5d8 {
   box-shadow: 0 0 40rpx #DDDDDD;
   z-index: 99;
+}
+/* 我加的 */
+.routeEditCss_right_site.data-v-51afe5d8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  /* height: 152rpx; */
+  overflow: hidden;
+}
+.routeEditCss_right_site_number.data-v-51afe5d8 {
+  font-size: 39rpx;
+  color: #666666;
+}
+.routeEditCss_right_site_siteName.data-v-51afe5d8 {
+  font-size: 45rpx;
+  color: #333333;
 }
 
