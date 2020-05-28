@@ -24,7 +24,7 @@
 						<view :class="item.colorClass" class="swiper-item">
 							<image :src="item.url" mode="aspectFill" class="swiper-item-image"/>
 						</view>
-					</swiper-item>
+					</swiper-item>d
 				</swiper>
 			</uni-swiper-dot>
 			
@@ -203,9 +203,11 @@
 
 <style>
 .navigator{
-	margin-top: 8%;
+	padding-top: 8%;
 	width: 100%;
 	font-size: 30rpx;
+	background-color: #11B5D1;
+	color: #FFFFFF;
 }
 
 button::after{
@@ -240,6 +242,8 @@ button::after{
 	text-align: center;
 	vertical-align: top;
 	font-size: 30rpx;
+	background-color: #11B5D1;
+	color: #FFFFFF;
 }
 
 .nav-search-placeholder{
@@ -312,6 +316,7 @@ button::after{
 	width:50%;
 	position:relative;
 	display: inline-block;
+	background-color: #FFFFFF;
 }
 
 .introduce_sites_image{

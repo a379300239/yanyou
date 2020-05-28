@@ -1,8 +1,10 @@
 
 .navigator{
-	margin-top: 8%;
+	padding-top: 8%;
 	width: 100%;
 	font-size: 30rpx;
+	background-color: #11B5D1;
+	color: #FFFFFF;
 }
 button::after{
 	border:none;
@@ -31,6 +33,8 @@ button::after{
 	text-align: center;
 	vertical-align: top;
 	font-size: 30rpx;
+	background-color: #11B5D1;
+	color: #FFFFFF;
 }
 .nav-search-placeholder{
 	font: 100;
@@ -87,6 +91,7 @@ button::after{
 	width:50%;
 	position:relative;
 	display: inline-block;
+	background-color: #FFFFFF;
 }
 .introduce_sites_image{
 	display: inline-block;

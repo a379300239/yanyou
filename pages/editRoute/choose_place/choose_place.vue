@@ -136,7 +136,7 @@
 					/* 将当前路线加入用户路线 */
 					uni.setStorageSync(this.userInformation.userName+"_route",userRoute)
 					
-					uni.navigateTo({
+					uni.redirectTo({
 						url:"../editRoute?routeId="+routeId
 					})
 				}

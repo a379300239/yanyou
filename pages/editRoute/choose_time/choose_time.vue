@@ -25,7 +25,7 @@
 		<hFormAlert v-if="showRouteNameChooseView"  
 					name="chooseRouteNameView"
 					placeholder="路线名称"
-					title="请输入路线名称"
+					title="请开启您的旅行吧！"
 					@confirm="comfirm_choose" @cancel="cancel_choose"></hFormAlert>
 					
 		
@@ -107,7 +107,7 @@
 					}
 					var routeDay=this.dateSpace(this.startDate,this.endDate);
 					var surl="routeName="+this.routeName+"&startDate="+this.startDate+"&endDate="+this.endDate+"&routeDay="+routeDay;
-					uni.navigateTo({
+					uni.redirectTo({
 						url:"../choose_place/choose_place?"+surl,
 					});
 				}
