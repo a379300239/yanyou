@@ -40,11 +40,36 @@
 						<p class="playTimeCss_sitePlaytime">游玩约需{{siteInformation.sitePlayTime}}</p>
 					</view>
 					
-					<navigator style="display: inline-block;position: relative;left: 100rpx;margin-bottom: 20rpx;vertical-align: bottom;">
+					<view
+						style="display: inline-block;position: relative;left: 100rpx;margin-bottom: 20rpx;vertical-align: bottom;"
+						@click="open_introductionView">
 						<view style="display: inline-block;text-align: right;">
 							<p style="color: #5FD0DA;">更多详情></p>
 						</view>
-					</navigator>
+						
+						<uni-popup ref="introductionView" type="center" class="introductionView">
+							
+							<view class="introductionMask" >
+								<view class="introductionViewView">
+									
+									<view class="introductionViewViewTitle">
+										介绍
+									</view>
+									
+									<image src="../../static/modifySite/closeButton.png" @click="close_introductionView"></image>
+									
+									<scroll-view class="introductionViewViewContent" scroll-y="true">
+										
+										{{siteInformation.siteIntroduction}}
+									</scroll-view>
+									
+								</view>
+							</view>
+							
+						</uni-popup>
+					</view>
+					
+					
 					
 				</view>
 				
@@ -66,6 +91,7 @@
 
 <script>
 	import yanyouLoading from '@/components/yanyou-loading/yanyou-loading.vue'
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	export default {
 		data() {
 			return {
@@ -87,6 +113,9 @@
 				
 				this.load_siteInformation(this.currentSite);
 			},
+			onBackPress:function(){
+				return false;
+			},
 			open_map:function(){
 				try{
 					// plus.runtime.openURL("androidamap://navi?sourceApplication=appname&poiname=fangheng&lat=36.547901&lon=104.258354&dev=1&style=2");
@@ -104,6 +133,17 @@
 					}
 				});
 			},
+			
+			// 打开更多详情
+			open_introductionView:function(){
+				this.$refs.introductionView.open();
+			},
+			
+			// 关闭更多详情
+			close_introductionView:function(){
+				this.$refs.introductionView.close();
+			},
+			
 			// 通过emit传值
 			add_site:function(){
 				var site={
@@ -123,7 +163,8 @@
 			
 		},
 		components:{
-			yanyouLoading
+			yanyouLoading,
+			uniPopup
 		}
 	}
 </script>
@@ -225,4 +266,50 @@
 	width: 162rpx;
 	height: 100rpx;
 }
+
+.introductionMask{
+	width: 750rpx;
+	height: 100%;
+	display: flex;
+	position: fixed;
+	align-items: center;
+	justify-content: center;
+	left: 0;
+	top: 0;
+	z-index: -1;
+}
+
+.introductionView{
+	position: absolute;
+	z-index: 100;
+}
+
+.introductionViewView{
+	width: 630rpx;
+	background-color: #FFFFFF;
+	padding: 40rpx 30rpx 40rpx 30rpx;
+	border-radius: 30rpx;
+}
+
+.introductionViewView image{
+	position: relative;
+	left: 480rpx;
+	bottom: 15rpx;
+	width: 60rpx;
+	height: 60rpx;
+}
+
+.introductionViewViewTitle{
+	font-weight: 1000;
+	font-size: 45rpx;
+	display: inline-block;
+	margin:0rpx 0 0 0;
+}
+.introductionViewViewContent{
+	height: 600rpx;
+	padding-top: 30rpx;
+	font-size: 35rpx;
+	line-height: 2;
+}
+
 </style>

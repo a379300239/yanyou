@@ -5,7 +5,7 @@
 				name="routeName" 
 				:required="false"
 				layout="column"
-				title="景点名称"
+				title="路线名称"
 				:placeholder="routeInfomation.routeName"
 				v-model="routeInfomation.routeName"
 				></QSInput>

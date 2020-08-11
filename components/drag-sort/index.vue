@@ -9,7 +9,7 @@
     :animation="false"
 	disabled
     class="drag-sort-item"
-    :class="{'active': active === index, 'vh-1px-t': site.index > 0}">
+    :class="{'active': active === index, 'vh-1px-t': site.index > 0}" >
 	  
 		<image
 			:src="iconUrl+site.siteType+iconUrl_houZhui"/>

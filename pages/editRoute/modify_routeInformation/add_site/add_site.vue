@@ -9,6 +9,7 @@
 			<!-- 地点选择 -->
 			<navigator
 				url="../../choose_place/choose_place?isAdd=true"
+				open-type="navigate"
 				style="position: absolute;z-index: 1;top:150rpx;color: #FFFFFF;font-size: 45rpx;display: flex;justify-content: center;align-items: center;"
 				>
 				{{siteCity}}
@@ -62,7 +63,7 @@
 						<view class="aSiteCss_left"> 
 							<!-- 控制形状 -->
 							<view class="aSiteCss_image">
-								<img :src="site.siteImg"/>
+								<image :src="site.siteImg"/>
 							</view>
 						</view>
 						
@@ -97,7 +98,7 @@
 						<view class="aSiteCss_left"> 
 							<!-- 控制形状 -->
 							<view class="aSiteCss_image">
-								<img :src="food.foodImg"/>
+								<image :src="food.foodImg"/>
 							</view>
 						</view>
 						
@@ -377,7 +378,6 @@
 			//增加景点
 			add_site:function(siteObject){
 				if(siteObject){
-					console.log(this.dayId)
 					this.routeInformaion.route[this.dayId].push(siteObject);
 					this.save();
 				}
@@ -507,7 +507,7 @@
 	height: 260rpx;
 }
 
-.aSiteCss_image img{
+.aSiteCss_image image{
 	width:500rpx;
 	position: relative;
 	right: 130rpx;

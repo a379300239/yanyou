@@ -44,11 +44,10 @@
 					</navigator>
 			</view>
 			
-			
-			<!-- 操作菜单 -->
-			<chunLei-popups v-model="showDoList" :popData="listData" @tapPopup="clickList" :x="x" :y="y" placement="top-end" theme="dark" dynamic></chunLei-popups>
-			
 		</view>
+		
+		<!-- 操作菜单 -->
+		<chunLei-popups v-model="showDoList" :popData="listData" @tapPopup="clickList" :x="x" :y="y" placement="top-end" theme="dark" dynamic></chunLei-popups>
 		
 	</view>
 	
@@ -59,6 +58,7 @@
 	</view>
 	
 	
+		
 </template>
 
 <script>

@@ -206,8 +206,8 @@
 	padding-top: 8%;
 	width: 100%;
 	font-size: 30rpx;
-	background-color: #11B5D1;
-	color: #FFFFFF;
+	background-color: #ffffff;
+	color: #000000;
 }
 
 button::after{
@@ -242,8 +242,8 @@ button::after{
 	text-align: center;
 	vertical-align: top;
 	font-size: 30rpx;
-	background-color: #11B5D1;
-	color: #FFFFFF;
+	background-color: #ffffff;
+	color: #000000;
 }
 
 .nav-search-placeholder{

@@ -37,7 +37,7 @@
 					@click="change_day(index)"
 					v-bind:class="{'routeEditCss_left_day_choosed':index==dayId}">
 					<p class="routeEditCss_left_date">{{get_nextDate(routeInformaion.routeStartTime,index)}}</p>
-					<p class="routeEditCss_left_place">暂无行程</p>
+					<p class="routeEditCss_left_place">{{routeInformaion.route[dayId][0].siteCity}}</p>
 				</view>
 			</scroll-view>
 			
@@ -82,6 +82,7 @@
 			direction="vertical"
 			@trigger="click_menuButton" 
 			@fabClick="click_fab" />
+			
 			
 		<!-- 增加景点类型选择 -->
 		<view v-if="isPopUp" class="myPopupCss" @touchmove.stop.prevent="moveHandle">
@@ -169,6 +170,7 @@
 		},
 		methods: {
 			onLoad:function(e){
+				
 				// 用户信息
 				this.userInformation=uni.getStorageSync("currentUser");
 				
@@ -265,8 +267,7 @@
 			
 			// 增加景点
 			add_site:function(){
-				this.isPopUp=true;
-				this.start_operate();
+				this.open_choosePage('site');
 			},
 			
 			//根据不同类型进入不同页面
@@ -333,7 +334,7 @@
 			
 			//删除景点中
 			choose_delete:function(e){
-				this.deleteArray[e]=true;
+				this.deleteArray[e]=!this.deleteArray[e];
 			},
 			
 			confirm_delete:function(){
@@ -523,5 +524,13 @@
 	width: 200rpx;
 	background-color: #FF0000;
 	color: #FFFFFF;
+}
+
+.fab_mask{
+	width: 750rpx;
+	height: 100%;
+	position: absolute;
+	z-index: 100;
+	top: 0rpx;
 }
 </style>

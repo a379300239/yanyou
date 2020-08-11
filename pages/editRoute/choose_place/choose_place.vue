@@ -21,7 +21,10 @@
 						<view class="item">
 							<view class="title">
 							</view>
-							<view class="goods" v-for="(item2,index2) in item.list" :key="index2" @click="navigator_editRoutePage(item2.cityName)">
+							<view class="goods"
+								v-for="(item2,index2) in item.list" 
+								:key="index2"
+								@click="navigator_editRoutePage(item2.cityName)">
 								<image :src="item2.cityImg" mode=""></image>
 								<view>
 									<view>{{item2.cityName}}</view>
@@ -102,9 +105,10 @@
 			/* 网络请求,获得省份数据 */
 			get_province_online:function(){
 				uni.request({
-					url:"https://getman.cn/mock/yanyou_province",
+					// url:"https://getman.cn/mock/yanyou_province",
+					url:getApp().globalData.baseUrl+"/provinces",
 					success: (data) => {
-						this.leftArray=data.data;
+						this.leftArray=data.data._root_;
 					}
 				})
 			},
@@ -131,7 +135,7 @@
 						routeEndTime:this.endDate,
 						routeDay:this.routeDay,
 						routePlace:cityName,
-						route:[]
+						route:[[]]
 					}
 					/* 将当前路线加入用户路线 */
 					uni.setStorageSync(this.userInformation.userName+"_route",userRoute)

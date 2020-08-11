@@ -95,7 +95,7 @@
 					});
 				}
 				else{
-					//未出发点击事件，则默认为当前日期
+					//未触发点击事件，则默认为当前日期
 					if(this.startDate=="" || this.endDate==""){
 						var ndate=new Date();
 						var year=ndate.getFullYear();

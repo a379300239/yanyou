@@ -1,2 +1,0 @@
-setCssToHead([".",[1],"startPageCss{ background: url(../../static/img/startPage.85f34125.jpg-do-not-use-local-path-./pages/initialPage/initialPage.wxss\x263\x2613); background-repeat: no-repeat; background-size: 100% 100%; width: ",[0,750],"; }\n",],undefined,{path:"./pages/initialPage/initialPage.wxss"})();
-document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/initialPage/initialPage.wxml') } }));
